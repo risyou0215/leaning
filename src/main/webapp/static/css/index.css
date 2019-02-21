@@ -1,0 +1,356 @@
+@charset "utf-8";
+
+/*背景样式及能耗概览样式*/
+body,html{width:1920px;height:950px;margin:0;padding:0;}
+#big-bg{
+	background:url(../images/indexBg.jpg) no-repeat;
+	background-size:100%;
+	height:100%;
+	position:relative;
+	overflow:hidden;
+}
+#box-left{
+	width:320px;
+	height:500px;
+	float:left;
+	margin:130px 0 0 50px;
+}
+#box-right{
+	width:320px;
+	height:500px;
+	float:right;
+	margin:130px 50px 0 0;
+}
+#energy-survey{
+	height:300px;
+}
+#big-bg p.top-tile{
+	width:100%;
+	height:25px;
+	color:#fff;
+}
+#big-bg p.top-tile span{
+	font-size:20px;
+}
+#big-bg p.top-tile i:first-child{
+	display:block;
+	width:5px;
+	height:25px;
+	background:#6fd7cc;
+	margin-right:20px;
+}
+#big-bg p.top-tile i:last-child{
+	display:block;
+	margin-left:10px;
+	height:100%;
+	width:40px;
+	margin-top:6px;
+	background:url(../images/top-tile.jpg) no-repeat;
+	background-size:100%;
+}
+
+/*能耗评级/人均能耗*/
+#energy-survey>div{width:100%;height:240px;margin-top:10px;}
+#energy-survey .energy-chart{
+	width:49%;
+	height:240px;
+	float:left;
+}
+#energy-survey .circle-img{
+	width:80%;
+	height: 120px;
+	margin:0 auto;
+	background:url(../images/circle-energy.jpg) no-repeat;
+	background-size:100%;
+	text-align:center;
+	color:#fff;
+	/*line-height:120px;*/
+}
+#energy-survey .circle-img p:first-child{
+	font-size:30px;
+	color:#cdf9a4;
+	padding-top:30px;
+}
+#energy-survey .energy-type{
+	width:90px;
+	height:30px;
+	text-align:center;
+	line-height:30px;
+	margin:5px auto;
+	border:2px solid #b9a3a6;
+	font-size:20px;
+	color:#b87946;
+}
+#energy-survey .today-energy{
+	width:80%;
+	margin:20px auto;
+}
+#energy-survey .today-energy div{
+	float:left;
+}
+#energy-survey .today-energy .type-img{
+	width:50px;
+	height:50px;
+	margin-right:15px;
+}
+#energy-survey .today-water .type-img{
+	background:url(../images/water.jpg) no-repeat;
+	background-size:100%;
+}
+#energy-survey .today-elec .type-img{
+	background:url(../images/elec.jpg) no-repeat;
+	background-size:100%;
+}
+#energy-survey .today-energy div>p:first-child{
+	font-size:25px;
+	color:#cdf66a;
+	margin-bottom:3px;
+}
+#energy-survey .today-energy div>p:last-child{
+	color:#fff;
+}
+
+/*设备实时数据*/
+#equipment-data{
+	height:210px;
+}
+#equipment-data div{
+	width:100%;
+	height:180px;
+	margin-top:15px;
+	background:url(../images/data-table.jpg) no-repeat;
+	background-size:100%;
+}
+#equipment-data div table{
+	width:100%;
+	color:#fff;
+}
+#equipment-data div tr{
+	height:23px;
+}
+#equipment-data div td{
+	width:25%;
+	text-align:center;
+}
+
+/*顶部说明样式*/
+#top-title{
+	float:left;
+	width:50%;
+	height:95px;
+	margin:110px 0 0 100px;
+}
+#top-title div{float:left;}
+#top-title .online-type{
+	width:160px;
+	height:100%;
+	color:#fff;
+	font-size:18px;
+}
+#top-title .online-type div{
+	width:50%;
+	line-height:30px;
+	margin-top:5px;
+}
+#top-title .online-type div i{
+	display:block;
+	float:left;
+	height:30px;
+	width:30px;
+	margin-right:10px;
+}
+#top-title .online-type div:first-child i{
+	background:url(../images/online.png) no-repeat left;
+	background-size:100%;
+}
+#top-title .online-type div:last-child i{
+	background:url(../images/abnormal.png) no-repeat left;
+	background-size:100%;
+}
+
+#top-title .icon-type{
+	width:60%;
+	height:100%;
+	margin-left:20px;
+	background:url(../images/top-icon.jpg) no-repeat;
+	background-size:100%;
+}
+#top-title .icon-type .today-energy{
+	float:left;
+	width:25%;
+	margin:20px 18px;
+}
+#top-title .icon-type .today-energy:first-child{
+	margin-left:45px;
+}
+.icon-type .today-energy div{
+	float:left;
+}
+.icon-type .today-energy .type-img{
+	width:50px;
+	height:50px;
+	margin-right:15px;
+}
+.icon-type .room .type-img{
+	background:url(../images/room.jpg) no-repeat;
+	background-size:100%;
+}
+.icon-type .roomout .type-img{
+	background:url(../images/roomout.jpg) no-repeat;
+	background-size:100%;
+}
+.icon-type .dampness .type-img{
+	background:url(../images/dampness.jpg) no-repeat;
+	background-size:100%;
+}
+.icon-type .today-energy div>p{
+	height:30px;
+}
+.icon-type .today-energy div>p:first-child{
+	font-size:25px;
+	color:#cdf66a;
+	margin-bottom:3px;
+}
+.icon-type .today-energy div>p:last-child{
+	color:#fff;
+}
+
+/*气温与暖通能耗曲线*/
+#temperature{
+	height:240px;
+}
+#temperature-chart{
+	width:100%;
+	height:200px;
+	margin-top:10px;
+}
+
+/*重大事件*/
+#big-event{
+	height:210px;
+	margin-top:20px;
+}
+#big-event div{
+	width:100%;
+	height:180px;
+	margin-top:20px;
+	background:url(../images/big-event.jpg) no-repeat;
+	background-size:100%;
+	overflow:hidden;
+}
+#big-event div ul{
+	margin:10px;
+	margin-left:20px;
+}
+#big-event div ul li{
+	height:20px;
+	margin:5px 0;
+	font-size:14px;
+}
+#big-event div ul li:nth-child(odd){
+	color:#e0171f;
+}
+#big-event div ul li:nth-child(even){
+	color:#ee7733;
+}
+
+/*底部图标等样式*/
+#box-bottom{
+	width:90%;
+	position:absolute;
+	bottom:10px;
+	left:50px;
+}
+#box-bottom #week-water,#box-bottom #energy-ranking{
+	float:left;
+}
+#box-bottom #week-elec,#box-bottom #contrast{
+	float:right;
+}
+
+/*近一周用水情况*/
+#week-water,#week-elec{
+	width:320px;
+	height:210px;
+}
+#week-water-chart,#week-elec-chart{
+	width:100%;
+	height:180px;
+	margin-top:10px;
+}
+
+#energy-ranking{
+	width:320px;
+	height:210px;
+	margin-left:50px;
+}
+	
+#energy-ranking-chart{
+	width:100%;
+	height:180px;
+	margin-top:10px;
+}	
+
+/*环比样式*/
+#contrast{
+	width:320px;
+	height:150px;
+	margin-top:70px;
+	margin-right:40px;
+}	
+#contrast ul li{
+	height:40px;
+	margin:5px;
+}	
+#contrast ul li div{
+	float:left;
+}	
+#contrast ul li div.contrast-icon{
+	width:30px;
+	height:30px;
+	margin-right:20px;
+	margin-top:5px;
+}
+#contrast ul li:first-child div.contrast-icon{
+	background:url(../images/nuantong.jpg) no-repeat;
+	background-size:100%;
+}
+#contrast ul li:nth-child(2) div.contrast-icon{
+	background:url(../images/dianuan.jpg) no-repeat;
+	background-size:100%;
+}
+#contrast ul li:last-child div.contrast-icon{
+	background:url(../images/zhaoming.jpg) no-repeat;
+	background-size:100%;
+}
+#contrast ul li div.contrast-text p:first-child{
+	font-size:14px;
+	color:#fff;
+}
+#contrast ul li div.contrast-text p.jump{
+	font-size:14px;
+	color:#3ab073;
+}
+#contrast ul li div.contrast-text p.up{
+	font-size:14px;
+	color:#d3925c;
+}
+#contrast ul li div i{
+	display:block;
+	float:left;
+	margin:5px 10px 0 30px;
+	width:30px;
+	height:30px;
+}
+#contrast ul li div.jump i{
+	background:url(../images/jump.jpg) no-repeat left;
+	background-size:100%;
+}
+#contrast ul li div.up i{
+	background:url(../images/up.jpg) no-repeat left;
+	background-size:100%;
+}
+#contrast ul li div>span{
+	font-size:30px;
+	color:#d6ff3f;
+}
