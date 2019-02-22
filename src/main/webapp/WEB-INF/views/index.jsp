@@ -123,6 +123,10 @@
 				</div>
 			</div>
 		</div>
+		<div id="box-middle">
+			<div id="scatter"></div>
+			<div id="heatChart"></div>
+		</div>
 		<div id="box-right">
 			<div id="temperature">
 				<p class="top-tile">
@@ -202,5 +206,42 @@
 		</div>
 	</div>
 </body>
+<script type="text/javascript" src="${path}/static/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="${path}/static/js/echarts.js"></script>
+<script type="text/javascript" src="${path}/static/js/scatter.js"></script>
+<script type="text/javascript" src="${path}/static/js/heatmap.js"></script>
 <script type="text/javascript" src="${path}/static/js/index.js"></script>
+<script type="text/javascript">
+	var random = function(lowerValue, upperValue) {
+		return Math.floor(Math.random() * (upperValue - lowerValue)
+				+ lowerValue);
+	};
+
+	var _width = $(window).width(), _height = $(window).height();
+	var heatmapInstance = h337.create({
+		container : document.getElementById('heatChart'),
+	});
+	//构建随机数据点
+	var points = [];
+	var max = 0;
+	var width = _width;
+	var height = _height;
+	var len = 200;
+	while (len--) {
+		var val = Math.floor(Math.random() * 100);
+		max = Math.max(max, val);
+		var point = {
+			x : random(_width * 0.25, _width * 0.65),
+			y : random(_height * 0.1, _height * 0.8),
+			value : val
+		};
+		points.push(point);
+	}
+	console.log(points, _width, _height);
+	var data = {
+		max : max,
+		data : points
+	};
+	heatmapInstance.setData(data);
+</script>
 </html>

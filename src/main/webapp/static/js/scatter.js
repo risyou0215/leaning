@@ -13,20 +13,20 @@
 
     //将数据装载到不同区域数组中
   	for (var i = 0; i < 150; i++) {
-       data2.push([random(6.5,8), random(6.5,7.2), random(0,1)]);
+       data2.push([random(8.5,10), random(6.5,7.2), random(0,1)]);
     };
     for (var i = 0; i < 300; i++) {
-       data2.push([random(7,9.5), random(3.5,5.5), random(0,1)]);
+       data2.push([random(9,11.5), random(3.5,5.5), random(0,1)]);
     };
     for (var i = 0; i < 100; i++) {
-       	data1.push([random(5,7), random(2,4), random(0,1)]);
-       	data2.push([random(4.2,6.5), random(5.5,6.8), random(0,1)]);
-       	data2.push([random(8,12), random(5,8), random(0,1)]);
+       	data1.push([random(7,9), random(2,4), random(0,1)]);
+       	data2.push([random(6.2,8.5), random(5.5,6.8), random(0,1)]);
+       	data2.push([random(10,14), random(5,8), random(0,1)]);
     };
     for (var i = 0; i < 30; i++) {
-       data3.push([random(4.2,7), random(4,5.5), random(0,1)]);
-       data3.push([random(5,8), random(7.2,8.5), random(0,1)]);
-       data3.push([random(7,11), random(2.5,3.5), random(0,1)]);
+       data3.push([random(6.2,9), random(4,5.5), random(0,1)]);
+       data3.push([random(7,10), random(7.2,8.5), random(0,1)]);
+       data3.push([random(9,13), random(2.5,3.5), random(0,1)]);
        data3.push([random(0,15), random(2,8), random(0,1)]);
     };
 
@@ -58,8 +58,8 @@
             ],
             zlevel:5,//设置Canvas分层 zlevel值不同会被放在不同的动画效果中,传说中z值小的图形会被z值大的图形覆盖
             z:3,//z的级别比zlevel低，传说中z值小的会被z值大的覆盖，但不会重新创建Canvas
-            left:'center',//图例组件离容器左侧的距离。可以是像 '20%' 这样相对于容器高宽的百分比，也可以是 'left', 'center', 'right'。
-            top:'top',
+            //left:'center',//图例组件离容器左侧的距离。可以是像 '20%' 这样相对于容器高宽的百分比，也可以是 'left', 'center', 'right'。
+            //top:'top',
             width:'auto',//设置图例组件的宽度，默认值为auto,好像只能够使用px
             orient:'horizontal',//设置图例组件的朝向默认是horizontal水平布局，'vertical'垂直布局
             align:'auto',//'left'  'right'设置图例标记和文本的对齐，默认是auto
@@ -88,7 +88,10 @@
         //网格
         grid:{
             show:false,//是否显示直角坐标系的网格,true显示，false不显示
-            left:100,//grid组件离容器左侧的距离
+            left:20,//grid组件离容器左侧的距离
+            right:0,
+            top:0,
+            bottom:20,
             containLabel:false,
         },
         xAxis: {
@@ -101,7 +104,7 @@
             gridIndex:0,//x轴所在的grid的索引，默认位于第一个grid
             type:'value',//数值轴适用于连续型数据
             inverse:false,//是否反向坐标
-            boundaryGap:['20%','20%'],//坐标轴两边留白策略，类目轴和非类目轴的设置和表现不一样。
+            //boundaryGap:['20%','20%'],//坐标轴两边留白策略，类目轴和非类目轴的设置和表现不一样。
             splitLine: {
                 show: false
             }
