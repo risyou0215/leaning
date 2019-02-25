@@ -1,3 +1,33 @@
+/*能耗人流chart图切换*/
+$(function(){
+	var flag = false;
+	$(".online-type div").click(function(){
+		var _width = $("#box-middle").width(),
+			_height = $("#box-middle").height();
+		var thisId = $(this).attr("id");
+		if(flag == false){
+			$(this).addClass("start").siblings().removeClass("start");
+			if(thisId == "person-scatter"){
+				$("#scatter").css({"width":_width,"height":_height});
+				$("#scatter").addClass("show").siblings().removeClass("show");
+				flag = true;
+			}else{
+				$("#scatter").removeClass("show").siblings().addClass("show");
+				flag = true;
+			}
+		}else{
+			$(this).removeClass("start").siblings().removeClass("start");
+			if(thisId == "person-scatter"){
+				$("#scatter").removeClass("show").siblings().removeClass("show");
+				flag = false;
+			}else{
+				$("#scatter").removeClass("show").siblings().removeClass("show");
+				flag = false;
+			}
+		}
+	});
+})
+
 /*近一周用水情况*/
 var myChart = echarts.init(document.getElementById('week-water-chart'));
 var data1 = [1500,1600,1650,1700,1800,1950,2100]
@@ -12,7 +42,7 @@ option = {
         data:[]
     },
     calculable : true,
-     grid:{
+    grid:{
         x:40,
         y:10,
         x2:10,

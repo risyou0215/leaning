@@ -95,7 +95,7 @@
             containLabel:false,
         },
         xAxis: {
-        	show:true,
+        	show:false,
             type: 'value',
             min: 0,
             name:'',
@@ -112,7 +112,7 @@
 
         //Y轴
         yAxis: {
-        	show:true,
+        	show:false,
             type: 'value',
             min: 0,
             max: 10,

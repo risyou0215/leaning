@@ -92,11 +92,11 @@
 		</div>
 		<div id="top-title">
 			<div class="online-type">
-				<div>
-					<i></i>在线
+				<div id="person-scatter">
+					<i></i>人流
 				</div>
-				<div>
-					<i></i>异常
+				<div id="energy-heatmap">
+					<i></i>能耗
 				</div>
 			</div>
 			<div class="icon-type">
@@ -217,7 +217,7 @@
 				+ lowerValue);
 	};
 
-	var _width = $(window).width(), _height = $(window).height();
+	var _width = $("#heatChart").width(), _height = $("#heatChart").height();
 	var heatmapInstance = h337.create({
 		container : document.getElementById('heatChart'),
 	});
@@ -231,13 +231,12 @@
 		var val = Math.floor(Math.random() * 100);
 		max = Math.max(max, val);
 		var point = {
-			x : random(_width * 0.25, _width * 0.65),
+			x : random(_width * 0.4, _width * 0.9),
 			y : random(_height * 0.1, _height * 0.8),
 			value : val
 		};
 		points.push(point);
 	}
-	console.log(points, _width, _height);
 	var data = {
 		max : max,
 		data : points
