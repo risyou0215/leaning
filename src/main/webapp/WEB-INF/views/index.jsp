@@ -17,7 +17,7 @@
 		<div id="box-left">
 			<div id="energy-survey">
 				<p class="top-tile">
-					<i class="lf"></i> <span class="lf">能耗概览</span> <i class="lf"></i>
+					<i class="lf"></i> <span class="lf">能1耗概览</span> <i class="lf"></i>
 				</p>
 				<div>
 					<div class="energy-lv energy-chart">
