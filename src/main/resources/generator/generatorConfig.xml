@@ -3,67 +3,10 @@
 <generatorConfiguration>
   <classPathEntry location="/Users/lijie/.m2/repository/mysql/mysql-connector-java/5.1.47/mysql-connector-java-5.1.47.jar"/>
   <context id="basic" targetRuntime="MyBatis3Simple" defaultModelType="flat">
-  	<jdbcConnection connectionURL="jdbc:mysql://47.93.97.8:3306/together" driverClass="com.mysql.jdbc.Driver" password="jethz1981" userId="root" />
-    <javaModelGenerator targetPackage="com.jetlee.oscar.together.basic.model" targetProject="together/src/main/java" />
-    <sqlMapGenerator targetPackage="com.jetlee.oscar.together.basic.mapper" targetProject="together/src/main/resources" />
-    <javaClientGenerator targetPackage="com.jetlee.oscar.together.basic.mapper" targetProject="together/src/main/java" type="XMLMAPPER" /> 	
-    <!--
-    <table schema="together" tableName="basic_category"></table>
-    <table schema="together" tableName="basic_product"></table>
-    <table schema="together" tableName="basic_product_color"></table>
-    <table schema="together" tableName="basic_product_size"></table>
-    <table schema="together" tableName="basic_product_picture"></table>
-    
-    <table schema="together" tableName="basic_supplier"></table>
-    -->
-    <table schema="together" tableName="basic_customer"></table>
+  	<jdbcConnection connectionURL="jdbc:mysql://47.93.97.8:3306/leaning" driverClass="com.mysql.jdbc.Driver" password="leaning" userId="leaning" />
+    <javaModelGenerator targetPackage="com.zhenningtech.leaning.equipment.model" targetProject="leaning/src/main/java" />
+    <sqlMapGenerator targetPackage="com.zhenningtech.leaning.equipment.mapper" targetProject="leaning/src/main/resources" />
+    <javaClientGenerator targetPackage="com.zhenningtech.leaning.equipment.mapper" targetProject="leaning/src/main/java" type="XMLMAPPER" /> 	
+    <table schema="leaning" tableName="equipment"></table>
   </context>
-  <!--
-  <context id="system" targetRuntime="MyBatis3Simple" defaultModelType="flat">
-    <jdbcConnection connectionURL="jdbc:mysql://47.93.97.8:3306/together" driverClass="com.mysql.jdbc.Driver" password="jethz1981" userId="root" />
-    <javaModelGenerator targetPackage="com.jetlee.oscar.together.system.model" targetProject="together/src/main/java" />
-    <sqlMapGenerator targetPackage="com.jetlee.oscar.together.system.mapper" targetProject="together/src/main/resources" />
-    <javaClientGenerator targetPackage="com.jetlee.oscar.together.system.mapper" targetProject="together/src/main/java" type="XMLMAPPER" />
-    <table schema="together" tableName="system_menu"></table>
-    <table schema="together" tableName="system_code"></table>
-    <table schema="together" tableName="system_color"></table>
-    <table schema="together" tableName="system_attachment"></table>
-    <table schema="together" tableName="system_city"></table>
-    <table schema="together" tableName="system_user"></table>
-  </context>
-  -->
-  <!--
-  <context id="inventory" targetRuntime="MyBatis3Simple" defaultModelType="flat">
-  	<jdbcConnection connectionURL="jdbc:mysql://47.93.97.8:3306/together" driverClass="com.mysql.jdbc.Driver" password="jethz1981" userId="root" />
-    <javaModelGenerator targetPackage="com.jetlee.oscar.together.inventory.model" targetProject="together/src/main/java" />
-    <sqlMapGenerator targetPackage="com.jetlee.oscar.together.inventory.mapper" targetProject="together/src/main/resources" />
-    <javaClientGenerator targetPackage="com.jetlee.oscar.together.inventory.mapper" targetProject="together/src/main/java" type="XMLMAPPER" />   
-    <table schema="together" tableName="inventory_purchase_main"></table>  
-    <table schema="together" tableName="inventory_purchase_detail"></table>
-    <table schema="together" tableName="inventory_purchase_return_main"></table>
-    <table schema="together" tableName="inventory_purchase_return_detail"></table>
-    <table schema="together" tableName="inventory_sales_return_main"></table>   
-    <table schema="together" tableName="inventory_sales_return_detail"></table>
-    <table schema="together" tableName="inventory_sales_main"></table>
-    <table schema="together" tableName="inventory_sales_detail"></table>
-    <table schema="together" tableName="inventory_stock"></table>
-    <table schema="together" tableName="inventory_stockin_main"></table>
-    <table schema="together" tableName="inventory_stockin_detail"></table>
-    <table schema="together" tableName="inventory_stockout_main"></table>
-    <table schema="together" tableName="inventory_stockout_detail"></table>
-    <table schema="together" tableName="inventory_purchase_detail_view"></table>   
-    <table schema="together" tableName="inventory_sales_detail_view"></table>     
-    <table schema="together" tableName="inventory_stock_view"></table> 
-  </context>
-  --> 
-  <!--
-  <context id="account" targetRuntime="MyBatis3Simple" defaultModelType="flat">
-  	<jdbcConnection connectionURL="jdbc:mysql://47.93.97.8:3306/together" driverClass="com.mysql.jdbc.Driver" password="jethz1981" userId="root" />
-    <javaModelGenerator targetPackage="com.jetlee.oscar.together.account.model" targetProject="together/src/main/java" />
-    <sqlMapGenerator targetPackage="com.jetlee.oscar.together.account.mapper" targetProject="together/src/main/resources" />
-    <javaClientGenerator targetPackage="com.jetlee.oscar.together.account.mapper" targetProject="together/src/main/java" type="XMLMAPPER" />
-    <table schema="together" tableName="account_pay_main"></table>  
-    <table schema="together" tableName="account_pay_detail"></table>  
-  </context> 
-  -->
 </generatorConfiguration>
