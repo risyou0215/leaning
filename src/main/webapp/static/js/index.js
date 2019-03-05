@@ -26,7 +26,20 @@ $(function(){
 			}
 		}
 	});
+	
+	tooltip();
 })
+
+/*区域悬浮框*/
+function tooltip(){
+	$("#highlight>div").mouseover(function(){
+		var num = $(this).data("id"),
+			RL = $(this).data("renliu"),
+			NH = $(this).data("nenghao");
+		var html = '<div><p>区域'+num+'</p><p>人流：<span>'+RL+'</span></p><p>能耗：<span>'+NH+'</span></p></div>';
+		$(this).append(html);
+	})
+}
 
 /*近一周用水情况*/
 var myChart = echarts.init(document.getElementById('week-water-chart'));

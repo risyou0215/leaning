@@ -10,19 +10,19 @@ body,html{width:1920px;height:1080px;margin:0;padding:0;}
 	overflow:hidden;
 }
 #box-left{
-	width:320px;
+	width:400px;
 	height:500px;
 	float:left;
-	margin:130px 0 0 50px;
+	margin:150px 0 0 70px;
 }
 #box-right{
-	width:320px;
+	width:400px;
 	height:500px;
 	float:right;
-	margin:130px 50px 0 0;
+	margin:-55px 70px 0 0;
 }
 #energy-survey{
-	height:300px;
+	height:330px;
 }
 #big-bg p.top-tile{
 	width:100%;
@@ -34,7 +34,7 @@ body,html{width:1920px;height:1080px;margin:0;padding:0;}
 }
 #big-bg p.top-tile i:first-child{
 	display:block;
-	width:5px;
+	width:10px;
 	height:25px;
 	background:#6fd7cc;
 	margin-right:20px;
@@ -50,7 +50,7 @@ body,html{width:1920px;height:1080px;margin:0;padding:0;}
 }
 
 /*能耗评级/人均能耗*/
-#energy-survey>div{width:100%;height:240px;margin-top:10px;}
+#energy-survey>div{width:100%;height:240px;margin-top:30px;}
 #energy-survey .energy-chart{
 	width:49%;
 	height:240px;
@@ -58,7 +58,7 @@ body,html{width:1920px;height:1080px;margin:0;padding:0;}
 }
 #energy-survey .circle-img{
 	width:80%;
-	height: 120px;
+	height: 155px;
 	margin:0 auto;
 	background:url(../images/circle-energy.jpg) no-repeat;
 	background-size:100%;
@@ -113,11 +113,12 @@ body,html{width:1920px;height:1080px;margin:0;padding:0;}
 /*设备实时数据*/
 #equipment-data{
 	height:210px;
+	margin-top:30px;
 }
 #equipment-data div{
 	width:100%;
 	height:180px;
-	margin-top:15px;
+	margin-top:30px;
 	background:url(../images/data-table.jpg) no-repeat;
 	background-size:100%;
 }
@@ -126,7 +127,7 @@ body,html{width:1920px;height:1080px;margin:0;padding:0;}
 	color:#fff;
 }
 #equipment-data div tr{
-	height:23px;
+	height:30px;
 }
 #equipment-data div td{
 	width:25%;
@@ -136,7 +137,7 @@ body,html{width:1920px;height:1080px;margin:0;padding:0;}
 /*顶部说明样式*/
 #top-title{
 	float:left;
-	width:50%;
+	width:40%;
 	height:95px;
 	margin:110px 0 0 100px;
 }
@@ -169,7 +170,7 @@ body,html{width:1920px;height:1080px;margin:0;padding:0;}
 }
 
 #top-title .icon-type{
-	width:60%;
+	width:71%;
 	height:100%;
 	margin-left:20px;
 	background:url(../images/top-icon.jpg) no-repeat;
@@ -217,35 +218,34 @@ body,html{width:1920px;height:1080px;margin:0;padding:0;}
 
 /*气温与暖通能耗曲线*/
 #temperature{
-	height:240px;
+	height:270px;
 }
 #temperature-chart{
 	width:100%;
-	height:200px;
-	margin-top:10px;
+	height:220px;
+	margin-top:30px;
 }
 
 /*重大事件*/
 #big-event{
 	height:210px;
-	margin-top:20px;
+	margin-top:30px;
 }
 #big-event div{
 	width:100%;
-	height:180px;
-	margin-top:20px;
+	height:220px;
+	margin-top:30px;
 	background:url(../images/big-event.jpg) no-repeat;
 	background-size:100%;
 	overflow:hidden;
 }
 #big-event div ul{
-	margin:10px;
-	margin-left:20px;
+	margin:20px;
 }
 #big-event div ul li{
-	height:20px;
+	height:25px;
 	margin:5px 0;
-	font-size:14px;
+	font-size:16px;
 }
 #big-event div ul li:nth-child(odd){
 	color:#e0171f;
@@ -258,7 +258,7 @@ body,html{width:1920px;height:1080px;margin:0;padding:0;}
 #box-bottom{
 	width:90%;
 	position:absolute;
-	bottom:10px;
+	bottom:50px;
 	left:50px;
 }
 #box-bottom #week-water,#box-bottom #energy-ranking{
@@ -270,32 +270,32 @@ body,html{width:1920px;height:1080px;margin:0;padding:0;}
 
 /*近一周用水情况*/
 #week-water,#week-elec{
-	width:320px;
-	height:210px;
+	width:400px;
+	height:260px;
 }
 #week-water-chart,#week-elec-chart{
 	width:100%;
-	height:180px;
-	margin-top:10px;
+	height:210px;
+	margin-top:20px;
 }
 
 #energy-ranking{
-	width:320px;
-	height:210px;
+	width:370px;
+	height:260px;
 	margin-left:50px;
 }
 	
 #energy-ranking-chart{
 	width:100%;
-	height:180px;
-	margin-top:10px;
+	height:210px;
+	margin-top:20px;
 }	
 
 /*环比样式*/
 #contrast{
 	width:320px;
 	height:150px;
-	margin-top:70px;
+	margin-top:105px;
 	margin-right:40px;
 }	
 #contrast ul li{
@@ -357,8 +357,8 @@ body,html{width:1920px;height:1080px;margin:0;padding:0;}
 
 /*中间区域样式*/
 #box-middle{
-	width:50%;
-	height:70%;
+	width:45%;
+	height:63%;
 	float:left;
 	margin:10px 50px;
 	background:url(../images/indexArea.png) no-repeat;
@@ -376,4 +376,120 @@ body,html{width:1920px;height:1080px;margin:0;padding:0;}
 #box-middle #scatter.show,#box-middle #heatChart.show{
 	opacity:1;
 }
+#box-middle #onAbanLine{
+	width:100%;
+	height:100%;
+	position:absolute;
+	top:0;
+	left:0;
+}
+
+/*区域高亮显示*/
+#highlight{
+	width:100%;
+	height:100%;
+	position:relative;
+}
+#highlight>div{
+	position:absolute;
+	opacity:0;
+}
+#highlight>div:hover{
+	opacity:1;
+}
+#arreaOne{
+	width:32%;
+	height:63%;
+	background:url(../images/arreaone.png) no-repeat;
+	background-size:100%;
+	top:9%;
+	left:1%;
+}
+#arreaTwo{
+	width:28%;
+	height:41%;
+	background:url(../images/arreatwo.png) no-repeat;
+	background-size:100%;
+	bottom:2.5%;
+	left:39%;
+}
+#arreaThree{
+	width:25%;
+	height:30%;
+	background:url(../images/arreathree.png) no-repeat;
+	background-size:100%;
+	top:4%;
+	left:36%;
+}
+#arreaFour{
+	width:31%;
+	height:43%;
+	background:url(../images/arreafour.png) no-repeat;
+	background-size:100%;
+	top:16%;
+	left:36%;
+}
+#arreaFive{
+	width:27%;
+	height:33%;
+	background:url(../images/arreafive.png) no-repeat;
+	background-size:100%;
+	top:3%;
+	right:13.5%;
+}
+#arreaSix{
+	width:21%;
+	height:41%;
+	background:url(../images/arreasix.png) no-repeat;
+	background-size:100%;
+	top:14%;
+	right:2%;
+}
+#arreaSeven{
+	width:41%;
+	height:29%;
+	background:url(../images/arreaseven.png) no-repeat;
+	background-size:100%;
+	bottom:16.5%;
+	right:3.5%;
+}
+#arreaEight{
+	width:18%;
+	height:23%;
+	background:url(../images/arreaeight.png) no-repeat;
+	background-size:100%;
+	bottom:32.5%;
+	right:22%;
+}
+
+/*人流能耗悬浮框*/
+#highlight>div div{
+	width:170px;
+	height:100px;
+	color:#fff;
+	border:1px solid #aaa;
+	border-radius:5px;
+	background:#0e2638;
+	position:absolute;
+	top:0;
+	right:-150px;
+	z-index:999;
+}
+#highlight>div div p:first-child{
+	height:30px;
+	font-size:20px;
+	text-align:center;
+}
+#highlight>div div p:last-child,#highlight>div div p:nth-child(2){
+	height:30px;
+	font-size:18px;
+	padding-left:20px;
+}
+#highlight>div div p:last-child span,#highlight>div div p:nth-child(2) span{
+	font-size:25px;
+	color:#d6ff3f;
+}
+
+
+
 

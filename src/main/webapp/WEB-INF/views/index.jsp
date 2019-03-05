@@ -17,7 +17,7 @@
 		<div id="box-left">
 			<div id="energy-survey">
 				<p class="top-tile">
-					<i class="lf"></i> <span class="lf">能1耗概览</span> <i class="lf"></i>
+					<i class="lf"></i> <span class="lf">能耗概览</span> <i class="lf"></i>
 				</p>
 				<div>
 					<div class="energy-lv energy-chart">
@@ -126,6 +126,26 @@
 		<div id="box-middle">
 			<div id="scatter"></div>
 			<div id="heatChart"></div>
+			<div id="onAbanLine"></div>
+			<div id="highlight">
+				<div id="arreaOne" data-id="一" data-renliu="45" data-nenghao="1220">
+					<!--<div>
+							<p>区域一</p>
+							<p>人流：<span>50</span></p>
+							<p>能耗：<span>1220</span></p>
+						</div>-->
+				</div>
+				<div id="arreaTwo" data-id="二" data-renliu="20" data-nenghao="1000"></div>
+				<div id="arreaThree" data-id="三" data-renliu="20"
+					data-nenghao="1100"></div>
+				<div id="arreaFour" data-id="四" data-renliu="80" data-nenghao="1200"></div>
+				<div id="arreaFive" data-id="五" data-renliu="60" data-nenghao="1330"></div>
+				<div id="arreaSix" data-id="六" data-renliu="40" data-nenghao="900"></div>
+				<div id="arreaSeven" data-id="七" data-renliu="50"
+					data-nenghao="1150"></div>
+				<div id="arreaEight" data-id="八" data-renliu="55"
+					data-nenghao="1100"></div>
+			</div>
 		</div>
 		<div id="box-right">
 			<div id="temperature">
@@ -206,8 +226,6 @@
 		</div>
 	</div>
 </body>
-<script type="text/javascript" src="${path}/static/js/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="${path}/static/js/echarts.js"></script>
 <script type="text/javascript" src="${path}/static/js/scatter.js"></script>
 <script type="text/javascript" src="${path}/static/js/heatmap.js"></script>
 <script type="text/javascript" src="${path}/static/js/index.js"></script>
