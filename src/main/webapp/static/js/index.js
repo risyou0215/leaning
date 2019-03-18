@@ -4,15 +4,22 @@ $(function(){
 	$(".online-type div").click(function(){
 		var _width = $("#box-middle").width(),
 			_height = $("#box-middle").height();
+			$("#highlight").css("z-index",10);
+			$("#onAbanLine").css("z-index",-10);
 		var thisId = $(this).attr("id");
 		if(flag == false){
 			$(this).addClass("start").siblings().removeClass("start");
 			if(thisId == "person-scatter"){
-				$("#scatter").css({"width":_width,"height":_height});
+				//$("#scatter").css({"width":_width,"height":_height});
 				$("#scatter").addClass("show").siblings().removeClass("show");
 				flag = true;
+			}else if(thisId == "energy-heatmap"){
+				$("#heatChart").addClass("show").siblings().removeClass("show");
+				flag = true;
 			}else{
-				$("#scatter").removeClass("show").siblings().addClass("show");
+				$("#onAbanLine").css("z-index",10);
+				$("#highlight").css("z-index",-10);
+				$("#onAbanLine").addClass("show").siblings().removeClass("show");
 				flag = true;
 			}
 		}else{
@@ -20,8 +27,13 @@ $(function(){
 			if(thisId == "person-scatter"){
 				$("#scatter").removeClass("show").siblings().removeClass("show");
 				flag = false;
-			}else{
+			}else if(thisId == "energy-heatmap"){
 				$("#scatter").removeClass("show").siblings().removeClass("show");
+				flag = false;
+			}else{
+				$("#onAbanLine").css("z-index",10);
+				$("#highlight").css("z-index",-10);
+				$("#onAbanLine").removeClass("show").siblings().removeClass("show");
 				flag = false;
 			}
 		}

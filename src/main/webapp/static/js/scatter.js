@@ -4,6 +4,7 @@
     var data1 = [];//数据区域缩放组件
     var data2 = [];
     var data3 = [];
+    
 
     //构造随机数
     var random = function (lowerValue,upperValue){
@@ -231,8 +232,8 @@
 var myChartFour = echarts.init(document.getElementById('onAbanLine'));
 
     var data1 = [[1.5,6.5],[1.3,3],[2.5,5.2],[5.9,6.8],[6,3.8],[7.8,1.6],[8.7,8],[8.8,6],[8.8,3.1],[10.3,4.2],[10.8,8.8],[11.6,2.4],[12.3,5],[12.7,3.7],[14,5.1]];//数据区域缩放组件
-    var data2 = [[4.2,7.5],[7.2,5.2],[11.2,6.2]];
-
+    var data2 = [[4.2,7.5,"楼道口","static/images/nuantong.jpg"],[7.2,5.2,"楼道口","static/images/nuantong.jpg"],[11.2,6.2,"楼道口","static/images/nuantong.jpg"]];
+    
     optionFour = {
         animation: false,//是否开启动画，默认是开启的，true是开启的,false是关闭的
 
@@ -280,7 +281,7 @@ var myChartFour = echarts.init(document.getElementById('onAbanLine'));
                 'scatter3':true
             },
             tooltip: {//图例的tooltip 配置，默认不显示,可以在文件较多的时候开启tooltip对文字进行剪切
-                show: true
+                show: true,
             },
             shadowBlur:30,//图例阴影的模糊大小
             shadowColor:'rgb(128, 128, 56)'//阴影的颜色
@@ -336,12 +337,22 @@ var myChartFour = echarts.init(document.getElementById('onAbanLine'));
             }
         },
 
-
+		tooltip: {
+	        formatter: function(param) {  
+                    var value = param;
+                    if(value.seriesName == "异常"){
+                    	return '<div style="width:160px;height:130px;font-size:18px;color:orange;font-weight:bold;margin: 3px;> '+'<p style="height:30px;border-bottom:1px solid #aaa;">'+ value.value[2] + 
+                    	'<span style="font-size: 20px;color:red;margin-left:10px;">异常</span></p>'+
+                    	'<div style="border-top:1px solid #aaa;margin-top:5px;width:100%"><img style="width:100%;height:100px" src="'+value.value[3]+'"><div>' +
+                    '</div>';  
+                    }
+               	}  
+	   },		
 
         //装载数据
         series: [
             {
-                name: 'scatter',
+                name: '正常',
                 type: 'scatter',
                 itemStyle: {
                     normal: {
@@ -353,7 +364,7 @@ var myChartFour = echarts.init(document.getElementById('onAbanLine'));
                 data: data1
             },
             {
-                name: 'scatter2',
+                name: '异常',
                 type: 'scatter',
                 itemStyle: {
                     normal: {
@@ -369,7 +380,7 @@ var myChartFour = echarts.init(document.getElementById('onAbanLine'));
     var flashList = [];
  
     var effectScatter = {
-        name: '当前',
+        name: '异常',
         type: 'effectScatter',
         coordinateSystem: 'cartesian2d',
         data: data2, //2d坐标系
@@ -388,7 +399,7 @@ var myChartFour = echarts.init(document.getElementById('onAbanLine'));
         },
         itemStyle: {
             normal: {
-                color: 'orange',
+                color: 'red',
                 shadowBlur: 10,
                 shadowColor: '#333'
             }

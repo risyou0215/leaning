@@ -98,6 +98,9 @@
 				<div id="energy-heatmap">
 					<i></i>能耗
 				</div>
+				<div id="equipment">
+					<i></i>设备
+				</div>
 			</div>
 			<div class="icon-type">
 				<div class="today-energy room">
@@ -230,6 +233,7 @@
 <script type="text/javascript" src="${path}/static/js/heatmap.js"></script>
 <script type="text/javascript" src="${path}/static/js/index.js"></script>
 <script type="text/javascript">
+
 	var random = function(lowerValue, upperValue) {
 		return Math.floor(Math.random() * (upperValue - lowerValue)
 				+ lowerValue);
@@ -244,17 +248,81 @@
 	var max = 0;
 	var width = _width;
 	var height = _height;
-	var len = 200;
+	//区域一
+	for (var i = 0; i < 122; i++) {
+		points.push({
+			x : random(50, 240),
+			y : random(120, 420),
+			radius : random(0.5, 5),
+			opacity : 0.4
+		});
+	};
+	//区域二
+	for (var i = 0; i < 25; i++) {
+		points.push({
+			x : random(400, 440),
+			y : random(420, 490),
+			radius : random(0.5, 5),
+			opacity : 0.4
+		});
+	};
+	for (var i = 0; i < 50; i++) {
+		points.push({
+			x : random(460, 500),
+			y : random(520, 540),
+			radius : random(0.5, 5),
+			opacity : 0.4
+		});
+	};
+
+	//区域三/四
+	for (var i = 0; i < 150; i++) {
+		points.push({
+			x : random(350, 500),
+			y : random(140, 420),
+			radius : random(0.5, 5),
+			opacity : 0.4
+		});
+	};
+
+	//区域五
+	for (var i = 0; i < 80; i++) {
+		points.push({
+			x : random(550, 700),
+			y : random(50, 220),
+			radius : random(0.5, 5),
+			opacity : 0.4
+		});
+	};
+	//区域六
+	for (var i = 0; i < 50; i++) {
+		points.push({
+			x : random(680, 800),
+			y : random(180, 350),
+			radius : random(0.5, 5),
+			opacity : 0.4
+		});
+	};
+	//区域七/八
+	for (var i = 0; i < 120; i++) {
+		points.push({
+			x : random(500, 760),
+			y : random(360, 500),
+			radius : random(0.5, 5),
+			opacity : 0.1
+		});
+	};
+	/*var len = 200;
 	while (len--) {
-		var val = Math.floor(Math.random() * 100);
-		max = Math.max(max, val);
-		var point = {
-			x : random(_width * 0.4, _width * 0.9),
-			y : random(_height * 0.1, _height * 0.8),
-			value : val
-		};
-		points.push(point);
-	}
+	    var val = Math.floor(Math.random()*100);
+	    max = Math.max(max, val);
+	    var point = {
+	        x: random(_width*0.4,_width*0.9),
+	        y: random(_height*0.1,_height*0.8),
+	        value: val
+	    };
+	    points.push(point);
+	}*/
 	var data = {
 		max : max,
 		data : points
