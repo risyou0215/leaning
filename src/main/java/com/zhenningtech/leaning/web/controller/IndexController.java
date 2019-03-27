@@ -12,4 +12,10 @@ public class IndexController {
 		ModelAndView mv = new ModelAndView("index");
 		return mv;
 	}
+	
+	@RequestMapping("setting")
+	public ModelAndView setting() {
+		ModelAndView mv = new ModelAndView("setting");
+		return mv;
+	}
 }
