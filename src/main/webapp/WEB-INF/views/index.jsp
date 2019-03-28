@@ -101,6 +101,9 @@
 				<div id="equipment">
 					<i></i>设备
 				</div>
+				<div id="personLine">
+					<i></i>路线
+				</div>
 			</div>
 			<div class="icon-type">
 				<div class="today-energy room">
@@ -130,6 +133,9 @@
 			<div id="scatter"></div>
 			<div id="heatChart"></div>
 			<div id="onAbanLine"></div>
+			<div id="linecancas">
+				<canvas id="arrow" class="drawArrow" width="864" height="680"></canvas>
+			</div>
 			<div id="highlight">
 				<div id="arreaOne" data-id="一" data-renliu="45" data-nenghao="1220">
 					<!--<div>
@@ -231,9 +237,9 @@
 </body>
 <script type="text/javascript" src="${path}/static/js/scatter.js"></script>
 <script type="text/javascript" src="${path}/static/js/heatmap.js"></script>
+<script type="text/javascript" src="${path}/static/js/personline.js"></script>
 <script type="text/javascript" src="${path}/static/js/index.js"></script>
 <script type="text/javascript">
-
 	var random = function(lowerValue, upperValue) {
 		return Math.floor(Math.random() * (upperValue - lowerValue)
 				+ lowerValue);

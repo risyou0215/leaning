@@ -365,7 +365,7 @@ body,html{width:1920px;height:1080px;margin:0;padding:0;}
 	background-size:100%;
 	position:relative;
 }
-#box-middle #scatter,#box-middle #heatChart,#box-middle #onAbanLine{
+#box-middle #scatter,#box-middle #heatChart,#box-middle #onAbanLine,#box-middle #linecancas{
 	width:100%;
 	height:100%;
 	opacity:0;
@@ -373,7 +373,7 @@ body,html{width:1920px;height:1080px;margin:0;padding:0;}
 	top:0;
 	left:0;
 }
-#box-middle #scatter.show,#box-middle #heatChart.show,#box-middle #onAbanLine.show{
+#box-middle #scatter.show,#box-middle #heatChart.show,#box-middle #onAbanLine.show,#box-middle #linecancas.show{
 	opacity:1;
 }
 #box-middle #onAbanLine{

@@ -4,9 +4,19 @@
   <classPathEntry location="/Users/lijie/.m2/repository/mysql/mysql-connector-java/5.1.47/mysql-connector-java-5.1.47.jar"/>
   <context id="basic" targetRuntime="MyBatis3Simple" defaultModelType="flat">
   	<jdbcConnection connectionURL="jdbc:mysql://47.93.97.8:3306/leaning" driverClass="com.mysql.jdbc.Driver" password="leaning" userId="leaning" />
-    <javaModelGenerator targetPackage="com.zhenningtech.leaning.equipment.model" targetProject="leaning/src/main/java" />
-    <sqlMapGenerator targetPackage="com.zhenningtech.leaning.equipment.mapper" targetProject="leaning/src/main/resources" />
-    <javaClientGenerator targetPackage="com.zhenningtech.leaning.equipment.mapper" targetProject="leaning/src/main/java" type="XMLMAPPER" /> 	
-    <table schema="leaning" tableName="equipment"></table>
+    <javaModelGenerator targetPackage="com.zhenningtech.leaning.basic.model" targetProject="leaning/src/main/java" />
+    <sqlMapGenerator targetPackage="com.zhenningtech.leaning.basic.mapper" targetProject="leaning/src/main/resources" />
+    <javaClientGenerator targetPackage="com.zhenningtech.leaning.basic.mapper" targetProject="leaning/src/main/java" type="XMLMAPPER" /> 	
+    <table schema="leaning" tableName="basic_equipment"></table>
+    <table schema="leaning" tableName="basic_category"></table>
+    <table schema="leaning" tableName="basic_equipment_picture"></table>
+  </context>
+  <context id="system" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+  	<jdbcConnection connectionURL="jdbc:mysql://47.93.97.8:3306/leaning" driverClass="com.mysql.jdbc.Driver" password="leaning" userId="leaning" />
+    <javaModelGenerator targetPackage="com.zhenningtech.leaning.system.model" targetProject="leaning/src/main/java" />
+    <sqlMapGenerator targetPackage="com.zhenningtech.leaning.system.mapper" targetProject="leaning/src/main/resources" />
+    <javaClientGenerator targetPackage="com.zhenningtech.leaning.system.mapper" targetProject="leaning/src/main/java" type="XMLMAPPER" /> 	
+    <table schema="leaning" tableName="system_menu"></table>
+    <table schema="leaning" tableName="system_attachment"></table>
   </context>
 </generatorConfiguration>

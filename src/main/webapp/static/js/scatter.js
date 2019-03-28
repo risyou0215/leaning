@@ -232,7 +232,7 @@
 var myChartFour = echarts.init(document.getElementById('onAbanLine'));
 
     var data1 = [[1.5,6.5],[1.3,3],[2.5,5.2],[5.9,6.8],[6,3.8],[7.8,1.6],[8.7,8],[8.8,6],[8.8,3.1],[10.3,4.2],[10.8,8.8],[11.6,2.4],[12.3,5],[12.7,3.7],[14,5.1]];//数据区域缩放组件
-    var data2 = [[4.2,7.5,"楼道口","static/images/nuantong.jpg"],[7.2,5.2,"楼道口","static/images/nuantong.jpg"],[11.2,6.2,"楼道口","static/images/nuantong.jpg"]];
+    var data2 = [[4.2,7.5,"楼道口","images/nuantong.jpg"],[7.2,5.2,"走廊","images/nuantong.jpg"],[11.2,6.2,"展馆入口","images/nuantong.jpg"]];
     
     optionFour = {
         animation: false,//是否开启动画，默认是开启的，true是开启的,false是关闭的

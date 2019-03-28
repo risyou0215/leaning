@@ -16,6 +16,9 @@ $(function(){
 			}else if(thisId == "energy-heatmap"){
 				$("#heatChart").addClass("show").siblings().removeClass("show");
 				flag = true;
+			}else if(thisId == "personLine"){
+				$("#linecancas").addClass("show").siblings().removeClass("show");
+				flag = true;
 			}else{
 				$("#onAbanLine").css("z-index",10);
 				$("#highlight").css("z-index",-10);
@@ -29,6 +32,9 @@ $(function(){
 				flag = false;
 			}else if(thisId == "energy-heatmap"){
 				$("#scatter").removeClass("show").siblings().removeClass("show");
+				flag = false;
+			}else if(thisId == "personLine"){
+				$("#linecancas").removeClass("show").siblings().removeClass("show");
 				flag = false;
 			}else{
 				$("#onAbanLine").css("z-index",10);
