@@ -5,7 +5,7 @@ import java.util.List;
 public interface BasicEquipmentPictureService {
 	int insert(Integer equipmentId, Integer attachmentId);
 	
-	int insertFromAttachment(Integer productId);
+	int insertFromAttachment(Integer equipmentId);
 	
 	List<Integer> selectAttachmentIdsByEquipmentId(Integer equipmentId);
 	

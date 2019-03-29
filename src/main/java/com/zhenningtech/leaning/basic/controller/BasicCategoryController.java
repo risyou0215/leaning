@@ -40,9 +40,9 @@ public class BasicCategoryController {
 	}
 	
 	/**
-	 * 保存指定的商品类目信息,如果没有该商品类目则新建商品类目
-	 * @param category  商品类目信息
-	 * @return 保存结果(成功:success=true,id=保存成功的商品类目ID 失败:success=false,message=错误信息)
+	 * 保存指定的设备类目信息,如果没有该设备类目则新建设备类目
+	 * @param category  设备类目信息
+	 * @return 保存结果(成功:success=true,id=保存成功的设备类目ID 失败:success=false,message=错误信息)
 	 */
 	@RequestMapping(value="save", method=RequestMethod.POST)
 	@ResponseBody
@@ -60,7 +60,7 @@ public class BasicCategoryController {
 				modelMap.put("id", category.getId());
 			} else {
 				modelMap.put("success", false);
-				modelMap.put("message", "保存商品类目失败!");
+				modelMap.put("message", "保存设备类目失败!");
 			}
 		} catch (Exception e) {
 			modelMap.put("success", false);
@@ -70,8 +70,8 @@ public class BasicCategoryController {
 	}
 	
 	/**
-	 * 删除指定的商品类目及其子类目
-	 * @param id 商品类目ID
+	 * 删除指定的设备类目及其子类目
+	 * @param id 设备类目ID
 	 * @return 保存结果(成功:success=true 失败:success=false,message=错误信息)
 	 */
 	@RequestMapping(value="delete/{id}", method=RequestMethod.GET)
@@ -83,7 +83,7 @@ public class BasicCategoryController {
 				modelMap.put("success", true);
 			} else {
 				modelMap.put("success", false);
-				modelMap.put("message", "删除商品类目失败!");
+				modelMap.put("message", "删除设备类目失败!");
 			}
 		} catch (Exception e) {
 			modelMap.put("success", false);

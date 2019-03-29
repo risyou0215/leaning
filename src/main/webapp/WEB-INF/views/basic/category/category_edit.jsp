@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>商品分类编辑</title>
+<title>设备分类编辑</title>
 <c:set var="path" value="${pageContext.request.contextPath}"></c:set>
 <link rel="stylesheet" type="text/css" href="${path}/static/jquery-easyui/themes/default/easyui.css" />
 <link rel="stylesheet" type="text/css" href="${path}/static/jquery-easyui/themes/icon.css" />
@@ -15,7 +15,7 @@
 <script type="text/javascript" src="${path}/static/jquery-plugins/jquery.form.js"></script>
 </head>
 <body class="easyui-layout">
-	<div id="p" data-options="region:'west',split:true" title="商品类目" style="width: 300px;border-top:0px; border-left:0px; border-bottom:0px">
+	<div id="p" data-options="region:'west',split:true" title="设备类目" style="width: 300px;border-top:0px; border-left:0px; border-bottom:0px">
 		<div class="easyui-layout" data-options="fit:true,border:false">
 			<div class="easyui-panel" style="padding: 2px 5px; border-top: 0px; border-left: 0px; border-right: 0px;" data-options="region:'north',border:false"> 
 				<a href="#" class="easyui-linkbutton easyui-tooltip" title="编辑" data-options="plain:true,iconCls:'icon-edit',onClick:editCategory"></a>
@@ -29,18 +29,18 @@
 			</div>
 		</div>
 	</div>
-	<div data-options="region:'center'" title="商品类目详情" style="border-top:0px; border-right:0px; border-bottom:0px;padding:20px;">
+	<div data-options="region:'center'" title="设备类目详情" style="border-top:0px; border-right:0px; border-bottom:0px;padding:20px;">
 		<div class="easyui-panel" style="padding: 10px;width:550px">
 			<form id="category_form" class="easyui-form" method="post">
 				<input id="id" name="id" type="hidden" /> 
 				<input id="parentId" name="parentId" type="hidden">
 				<div class="easyui-panel" style="padding: 5px; border: 0px;">
 					<div style="padding: 10px;">
-						<label for="code">商品类目编号:</label>
+						<label for="code">设备类目编号:</label>
 						<input id="code" class="easyui-textbox required" name="code" style="width: 400px">
 					</div>
 					<div style="padding: 10px;">
-						<label for="name">商品类目名称:</label> 
+						<label for="name">设备类目名称:</label> 
 						<input id="name" class="easyui-textbox required" name="name" style="width: 400px">
 					</div>
 					<div style="padding: 10px;">
@@ -48,7 +48,7 @@
 						<input id="status" class="easyui-switchbutton" name="status" checked>
 					</div>
 					<div style="padding: 10px;">
-						<label for="description" style="vertical-align: top">商品类型描述:</label>
+						<label for="description" style="vertical-align: top">设备类型描述:</label>
 						<input id="description" class="easyui-textbox" name="description" multiline="true" style="width: 400px; height: 120px">
 					</div>
 					<div style="text-align: right; padding: 2px 5px">
@@ -66,7 +66,7 @@
  	  *	 @method 页面载入
 	*/
 	$(function(){
-		//获得商品类目树(根类添加panel，子类以树形结构展示)
+		//获得设备类目树(根类添加panel，子类以树形结构展示)
 		$.ajax({
 			url:'${path}/basic/category/0',
 			type:'get',
@@ -78,12 +78,12 @@
 				}
 			}
 		});
-		$('#category_form').submit(categoryFormSubmit);  //绑定商品类目form的submit函数
+		$('#category_form').submit(categoryFormSubmit);  //绑定设备类目form的submit函数
 		setMode('view');  //设置为查看模式
 	});
 	
 	/**
-	 *	 @method 商品类目信息form提交
+	 *	 @method 设备类目信息form提交
 	 *   @param e 事件对象
 	*/
 	function categoryFormSubmit(e){
@@ -97,12 +97,12 @@
 			},
 			success:function(data) {
 				if (data.success == true) {  //成功
-		    		$.messager.alert('成功','保存商品类目成功!','info');
-				    //取得当前选中的商品类目节点
+		    		$.messager.alert('成功','保存设备类目成功!','info');
+				    //取得当前选中的设备类目节点
 		    		var panel = $('#category-accordion').accordion('getSelected');
 		        	var category_tree = $('#tree' + (panel.panel('options').id));
 		        	var category = category_tree.tree('getSelected');
-		        	//成功的情况下，更新页面上商品类目数的信息(不再向后台取数据)
+		        	//成功的情况下，更新页面上设备类目数的信息(不再向后台取数据)
 		    		if($('#id').val() != null && $('#id').val() != '') {  //更新的情况
 			        	category_tree.tree('update', {
 			        		target:category.target,
@@ -157,11 +157,11 @@
 	}
 	
 	/**
-	 *	 @method 在页面左边的accordion里增加一个商品类目的panel
-	 *   @param id 商品类目ID
-	 *   @param title 商品类目title
-	 *   @param data 该商品类目的子目录树JSON数据
-	 *   @param selected 该商品类目panel是否设置为被选中
+	 *	 @method 在页面左边的accordion里增加一个设备类目的panel
+	 *   @param id 设备类目ID
+	 *   @param title 设备类目title
+	 *   @param data 该设备类目的子目录树JSON数据
+	 *   @param selected 该设备类目panel是否设置为被选中
 	*/
 	function addCategoryPanel(id, title, data, code,selected) {
 		$('#category-accordion').accordion('add', {
@@ -178,12 +178,12 @@
 	 *	 @method 设置页面为编辑模式(编辑按钮点击是触发)
 	*/
 	function editCategory() {
-		//取得当前选中的商品类目节点
+		//取得当前选中的设备类目节点
 		var panel = $('#category-accordion').accordion('getSelected');
 		var category_tree = $('#tree' + (panel.panel('options').id));
 		var category = category_tree.tree('getSelected');
 		if (category == null) {	//如果没有任何节点被选中，则报错
-			$.messager.alert('错误','请选择想要编辑的商品类目!','error');
+			$.messager.alert('错误','请选择想要编辑的设备类目!','error');
 			return;
 		}
 		setMode('edit');  //设置为编辑模式
@@ -194,17 +194,17 @@
 	*/
 	function newCategory() {
 		var code = $('#code').textbox('getValue');
-		//清空from里商品类目信息
+		//清空from里设备类目信息
 		$('#category_form').form('clear');
 		$('#status').switchbutton('reset');
-		//取得当前选中的商品类目节点
+		//取得当前选中的设备类目节点
 		var panel = $('#category-accordion').accordion('getSelected');
 		var category_tree = $('#tree' + (panel.panel('options').id));
 		var category = category_tree.tree('getSelected');
-		if (category == null) {  //如果没有任何节点被选中，则将panel对应的商品类目作为父类目
+		if (category == null) {  //如果没有任何节点被选中，则将panel对应的设备类目作为父类目
 			$('#parentId').val(panel.panel('options').id);
 			code = panel.panel('options').code;
-		} else {  ////如果有节点被选中，则将该节点的商品类目作为父类目
+		} else {  ////如果有节点被选中，则将该节点的设备类目作为父类目
 			$('#parentId').val(category.id);
 		}
 		$.ajax({
@@ -226,26 +226,26 @@
 	}
 	
 	/**
-	 *	 @method 删除指定的商品类目及其子类目
+	 *	 @method 删除指定的设备类目及其子类目
 	*/
 	function deleteCategory() {
-		//取得当前选中的商品类目节点
+		//取得当前选中的设备类目节点
 		var panel = $('#category-accordion').accordion('getSelected');
 		var category_tree = $('#tree' + (panel.panel('options').id));
 		var category = category_tree.tree('getSelected');
 		if (category == null) {  //如果没有任何节点被选中，则报错
-			$.messager.alert('错误','请选择想要删除的商品类目!','error');
+			$.messager.alert('错误','请选择想要删除的设备类目!','error');
 			return;
 		}
-		//删除指定的商品类目及其子类目
-		$.messager.confirm('删除', '确认要删除该商品类目吗?', function(r){
+		//删除指定的设备类目及其子类目
+		$.messager.confirm('删除', '确认要删除该设备类目吗?', function(r){
 			if (r) {
 				$.ajax({
 					url:'${path}/basic/category/delete/' + category.id,
 					type:'get',
 					success:function(data) {
 						if (data.success == true) {   //删除成功
-							$.messager.alert('成功','删除商品类目成功!','info');
+							$.messager.alert('成功','删除设备类目成功!','info');
 							category_tree.tree('remove', category.target);
 							$('#category_form').form('clear');
 							$('#status').switchbutton('reset');
@@ -261,14 +261,14 @@
 	}
 	
 	/**
-	 *	 @method 保存编辑的商品类目(提交商品类目form)
+	 *	 @method 保存编辑的设备类目(提交设备类目form)
 	*/
 	function saveCategory() {
 		$('#category_form').submit();	
 	}
 	
 	/**
-	 *	 @method 清空form里商品类目信息
+	 *	 @method 清空form里设备类目信息
 	*/
 	function clearCategory() {
 		$('#category_form').form('clear');
@@ -276,7 +276,7 @@
 	}
 	
 	/**
-	 *	 @method 商品类目选中时，取得该类目的信息并显示
+	 *	 @method 设备类目选中时，取得该类目的信息并显示
 	*/
 	function onSelect(node) {
 		$.ajax({
@@ -300,7 +300,7 @@
     }
 	
 	/**
-	 *	 @method 取消对商品类目树节点的选中
+	 *	 @method 取消对设备类目树节点的选中
 	*/
 	function cancelSelected() {
 		clearCategory();

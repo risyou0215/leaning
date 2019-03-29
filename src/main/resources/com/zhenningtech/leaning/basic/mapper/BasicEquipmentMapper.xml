@@ -78,13 +78,6 @@
     from basic_equipment
   </select>
   
-  
-  
-  
-  
-  
-  
-  
   <resultMap extends="BaseResultMap" id="equipmentMapper" type="com.zhenningtech.leaning.basic.model.BasicEquipment">
   	<result column="type" />
   	<association column="category" fetchType="eager" property="categoryName" select="com.zhenningtech.leaning.basic.mapper.BasicCategoryMapper.selectNameByPrimaryKey" />
@@ -100,7 +93,7 @@
       #{description,jdbcType=LONGVARCHAR})
   </insert>
 
-  <select id="selectProduct" resultMap="equipmentMapper">
+  <select id="selectEquipment" resultMap="equipmentMapper">
   	select id, no, name, category, type, address,
     status, deleted, description
     from basic_equipment where deleted=0
@@ -116,15 +109,15 @@
     	(SELECT max(deleted) + 1 AS deleted, no FROM basic_equipment group by no) t2 
     SET t1.deleted = t2.deleted WHERE t1.no = t2.no 
     AND t1.id in
-    <foreach close=")" collection="list" item="productId" open="(" separator=",">
-    	#{productId}
+    <foreach close=")" collection="list" item="equipmentId" open="(" separator=",">
+    	#{equipmentId}
     </foreach>
   </update>
   
-  <select id="selectProductByPrimaryKey" parameterType="java.lang.Integer" resultMap="equipmentMapper">
+  <select id="selectEquipmentByPrimaryKey" parameterType="java.lang.Integer" resultMap="equipmentMapper">
   	select id, no, name, category, type, address,
     status, deleted, description
-    from basic_equipment where id = #{productId,jdbcType=INTEGER}
+    from basic_equipment where id = #{equipmentId,jdbcType=INTEGER}
   </select>
   
   <update id="updateByPrimaryKeyWithoutDeleted" parameterType="com.zhenningtech.leaning.basic.model.BasicEquipment">
@@ -138,7 +131,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   
-  <select id="selectProductName" resultType="string">
+  <select id="selectEquipmentName" resultType="string">
   	select name from basic_equipment where id = #{id,jdbcType=INTEGER}
   </select>
 </mapper>

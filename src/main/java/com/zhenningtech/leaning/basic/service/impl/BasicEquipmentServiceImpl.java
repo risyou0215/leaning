@@ -22,44 +22,44 @@ import com.zhenningtech.leaning.system.service.SystemAttachmentService;
 public class BasicEquipmentServiceImpl implements BasicEquipmentService {
 
 	@Autowired
-	private BasicEquipmentMapper basicProductMapper;   
+	private BasicEquipmentMapper basicEquipmentMapper;   
 
 	@Autowired
 	private SystemAttachmentService systemAttachmentService;  //附件Service
 	
 	@Autowired
-	private BasicCategoryService basicCategoryService;    //商品类目Service
+	private BasicCategoryService basicCategoryService;    //设备类目Service
 	
 	@Autowired
 	private BasicEquipmentPictureService basicEquipmentPictureService;
 	
 	@Override
-	public int newProduct(BasicEquipment record) {
-		int result = basicProductMapper.insertGeneratorKey(record);	
+	public int newEquipment(BasicEquipment record) {
+		int result = basicEquipmentMapper.insertGeneratorKey(record);	
 		basicEquipmentPictureService.insertFromAttachment(record.getId());
 		return result;
 	}
 	
 	@Override
-	public List<BasicEquipment> selectProductInPaging(Integer page, Integer rows, BasicEquipment basicProduct) {
-		List<Integer> ids = basicCategoryService.selectCategoryIds(basicProduct.getCategory());
+	public List<BasicEquipment> selectEquipmentInPaging(Integer page, Integer rows, BasicEquipment basicEquipment) {
+		List<Integer> ids = basicCategoryService.selectCategoryIds(basicEquipment.getCategory());
 		PageHelper.startPage(page, rows);
-		return basicProductMapper.selectProduct(ids, basicProduct);
+		return basicEquipmentMapper.selectEquipment(ids, basicEquipment);
 	}
 
 	@Override
-	public int deleteProduct(List<Integer> equipmentId) {
-		return basicProductMapper.deleteByPrimaryKeysLogic(equipmentId);
+	public int deleteEquipment(List<Integer> equipmentId) {
+		return basicEquipmentMapper.deleteByPrimaryKeysLogic(equipmentId);
 	}
 
 	@Override
-	public BasicEquipment selectProduct(Integer productId) {
-		return basicProductMapper.selectProductByPrimaryKey(productId);
+	public BasicEquipment selectEquipment(Integer equipmentId) {
+		return basicEquipmentMapper.selectEquipmentByPrimaryKey(equipmentId);
 	}
 
 	@Override
-	public int updateProduct(BasicEquipment record) {
-		int result = basicProductMapper.updateByPrimaryKeyWithoutDeleted(record);
+	public int updateEquipment(BasicEquipment record) {
+		int result = basicEquipmentMapper.updateByPrimaryKeyWithoutDeleted(record);
 		basicEquipmentPictureService.insertFromAttachment(record.getId());
 		return result;
 	}
@@ -67,7 +67,7 @@ public class BasicEquipmentServiceImpl implements BasicEquipmentService {
 	@Override
 	public int uploadPicture(CommonsMultipartFile file, String path) throws Exception {
 		SystemAttachment systemAttachment = new SystemAttachment();
-		systemAttachment.setTypeName("PRODUCT");
+		systemAttachment.setTypeName("EQUIPMENT");
 		return systemAttachmentService.UploadAttachment(file, path, systemAttachment);
 	}
 
@@ -78,7 +78,7 @@ public class BasicEquipmentServiceImpl implements BasicEquipmentService {
 			attachmentIds = basicEquipmentPictureService.selectAttachmentIdsByEquipmentId(equipmentId);
 		}
 		PageHelper.startPage(index, 1);
-		return systemAttachmentService.selectByIdsOrAttachmentType("PRODUCT", attachmentIds);
+		return systemAttachmentService.selectByIdsOrAttachmentType("EQUIPMENT", attachmentIds);
 	}
 	
 	@Override
@@ -89,6 +89,6 @@ public class BasicEquipmentServiceImpl implements BasicEquipmentService {
 	
 	@Override
 	public int deletePictureTemp() {
-		return systemAttachmentService.deleteByAttachmentType("PRODUCT");
+		return systemAttachmentService.deleteByAttachmentType("EQUIPMENT");
 	}
 }

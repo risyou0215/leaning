@@ -45,11 +45,11 @@ public interface BasicEquipmentMapper {
 	int insertGeneratorKey(BasicEquipment record);
 	
 	
-	List<BasicEquipment> selectProduct(@Param("categoryIds") List<Integer> categoryIds, @Param("product") BasicEquipment basicEquipment);
+	List<BasicEquipment> selectEquipment(@Param("categoryIds") List<Integer> categoryIds, @Param("equipment") BasicEquipment basicEquipment);
 	
-	int deleteByPrimaryKeysLogic(List<Integer> productIds);
+	int deleteByPrimaryKeysLogic(List<Integer> equipmentIds);
 	
-	BasicEquipment selectProductByPrimaryKey(Integer productId);
+	BasicEquipment selectEquipmentByPrimaryKey(Integer equipmentId);
 	
 	int updateByPrimaryKeyWithoutDeleted(BasicEquipment record);
 }

@@ -19,18 +19,18 @@
 		<div id="category-accordion" class="easyui-accordion" data-options="fit:true, border:false">
 		</div>
 	</div>
-	<div data-options="region:'center'" title="商品一览">
+	<div data-options="region:'center'" title="设备一览">
 		<div id="toolbar" style="padding: 2px 5px">
 			设备名称: 
-			<input id="productname-textbox" class="easyui-textbox" style="width: 200px" /> 
+			<input id="equipmentname-textbox" class="easyui-textbox" style="width: 200px" /> 
 			设备状态: 
-			<select id="productstatus-combobox" class="easyui-combobox" panelHeight="auto" style="width: 100px">
+			<select id="equipmentstatus-combobox" class="easyui-combobox" panelHeight="auto" style="width: 100px">
 				<option value="1">使用</option>
 				<option value="0">停用</option>
 			</select> 
-			<a href="#" class="easyui-linkbutton easyui-tooltip" title="查询" data-options="plain:true,iconCls:'icon-search',onClick:searchProduct"></a>
+			<a href="#" class="easyui-linkbutton easyui-tooltip" title="查询" data-options="plain:true,iconCls:'icon-search',onClick:searchEquipment"></a>
 		</div>
-		<table id="product_list" class="easyui-datagrid"
+		<table id="equipment_list" class="easyui-datagrid"
 			data-options="border:false, fit:true, pagination:true, toolbar:'#toolbar',onClickRow:onClickDataGridRow">
 			<thead>
 				<tr>
@@ -46,8 +46,8 @@
 		</table>
 	</div>
 	<div id="pager_buttons" style="padding: 2px 5px">
-		<a href="#" class="easyui-linkbutton easyui-tooltip" title="新增" data-options="plain:true,iconCls:'icon-add',onClick:addProduct"></a> 
-		<a href="#" class="easyui-linkbutton easyui-tooltip" title="删除" data-options="plain:true,iconCls:'icon-remove',onClick:deleteProductMulti"></a>
+		<a href="#" class="easyui-linkbutton easyui-tooltip" title="新增" data-options="plain:true,iconCls:'icon-add',onClick:addEquipment"></a> 
+		<a href="#" class="easyui-linkbutton easyui-tooltip" title="删除" data-options="plain:true,iconCls:'icon-remove',onClick:deleteEquipmentMulti"></a>
 	</div>
 </body>
 <script type="text/javascript">
@@ -55,7 +55,7 @@
 	  *	 @method 页面载入
 	*/
 	$(function() {
-		//获得商品类目树(根类添加panel，子类以树形结构展示)
+		//获得设备类目树(根类添加panel，子类以树形结构展示)
 		var categoryAccordion = $('#category-accordion');
 		$.ajax({
 			url:'${path}/basic/category/0',
@@ -69,8 +69,8 @@
 			}
 		});
 		
-		//设置商品一览Grid的url，并在并设置操作列里按钮的样式
-		$('#product_list').datagrid({
+		//设置设备一览Grid的url，并在并设置操作列里按钮的样式
+		$('#equipment_list').datagrid({
 			url:'${path}/basic/equipment/page',
 			method:'get',
 			cache:false,
@@ -93,18 +93,18 @@
 		});
 		
 		//翻页栏上添加功能按钮(新增,删除)
-		var pager = $('#product_list').datagrid().datagrid('getPager');
+		var pager = $('#equipment_list').datagrid().datagrid('getPager');
 		pager.pagination({
 		    buttons : '#pager_buttons'
 		});
 	});
 	
 	/**
-	 *	 @method 在页面左边的accordion里增加一个商品类目的panel
-	 *   @param id 商品类目ID
-	 *   @param title 商品类目title
-	 *   @param data 该商品类目的子目录树JSON数据
-	 *   @param selected 该商品类目panel是否设置为被选中
+	 *	 @method 在页面左边的accordion里增加一个设备类目的panel
+	 *   @param id 设备类目ID
+	 *   @param title 设备类目title
+	 *   @param data 该设备类目的子目录树JSON数据
+	 *   @param selected 该设备类目panel是否设置为被选中
 	*/
 	function addCategoryPanel(id, title, data, selected) {
 		$('#category-accordion').accordion('add', {
@@ -117,87 +117,87 @@
 	}
 	
 	/**
-	 *	 @method 商品类目选中时，取得该类目下的商品一览
+	 *	 @method 设备类目选中时，取得该类目下的设备一览
 	 *  @param node 选中节点的内容
 	*/
 	function onCategorySelect(node) {
-		var productName = $('#productname-textbox').val();   //选择条件部的商品名称的值
-		var productStatus = $('#productstatus-combobox').val();   //选择条件部的商品状态的值
-		if (productStatus != 1 && productStatus != 0){
-			productStatus = null;
+		var equipmentName = $('#equipmentname-textbox').val();   //选择条件部的设备名称的值
+		var equipmentStatus = $('#equipmentstatus-combobox').val();   //选择条件部的设备状态的值
+		if (equipmentStatus != 1 && equipmentStatus != 0){
+			equipmentStatus = null;
 		}
-		//重新load商品一览的Grid
-		$('#product_list').datagrid('load',{
+		//重新load设备一览的Grid
+		$('#equipment_list').datagrid('load',{
 			category:node.id,
-			name:productName,
-			status:productStatus
+			name:equipmentName,
+			status:equipmentStatus
 		});
 	}
 	
 	/**
-	 *	 @method 新建商品，打开一个新建商品的Tab
+	 *	 @method 新建设备，打开一个新建设备的Tab
 	*/
-	function addProduct() {
+	function addEquipment() {
 		var tabs = parent.$('#mainframe');
 		addTab(tabs, 1, '新建设备', '${path}/basic/equipment/add');
 	}
 	
 	/**
-	 *	 @method 编辑商品，打开一个编辑商品的Tab
+	 *	 @method 编辑设备，打开一个编辑设备的Tab
 	*/
-	function editProduct(productId) {
+	function editEquipment(equipmentId) {
 		//编辑按钮的tooltip会在打开新的Tab后，一直保持在显示状态，所以要人为关闭一下
 		var btns = $('.operator-edit');
 		for (var i = 0; i < btns.length; i ++) {
 			$(btns[i]).tooltip('hide');
 		}
 		var tabs = parent.$('#mainframe');
-		addTab(tabs, productId, '编辑设备', '${path}/basic/equipment/edit/' + productId);
+		addTab(tabs, equipmentId, '编辑设备', '${path}/basic/equipment/edit/' + equipmentId);
 	}
 	
 	/**
-	 *	 @method 删除单个商品(在点击每行操作列的删除按钮时触发)
-	 *	 @param productId 商品ID  
+	 *	 @method 删除单个设备(在点击每行操作列的删除按钮时触发)
+	 *	 @param equipmentId 设备ID  
 	*/
-	function deleteProductSingle(productId) {
+	function deleteEquipmentSingle(equipmentId) {
 		var ids = [];
-		ids.push(productId);
-		deleteProduct(ids);
+		ids.push(equipmentId);
+		deleteEquipment(ids);
 	}
 	
 	/**
-	 *	 @method 删除商品一览Grid里选中的商品(在点击Footer部的删除按钮时触发)
+	 *	 @method 删除设备一览Grid里选中的设备(在点击Footer部的删除按钮时触发)
 	*/
-	function deleteProductMulti() {
+	function deleteEquipmentMulti() {
 		var ids = [];
-		var rows = $('#product_list').datagrid('getChecked');
+		var rows = $('#equipment_list').datagrid('getChecked');
 		if (rows.length < 1) {
-			$.messager.alert('错误','请选择想要删除的商品!','error');
+			$.messager.alert('错误','请选择想要删除的设备!','error');
 			return;
 		}
 		for (var i =0; i < rows.length; i++){
 			ids.push(rows[i].id);
 		}
-		deleteProduct(ids)	;
+		deleteEquipment(ids)	;
 	}
 	
 	/**
-	 *	 @method 删除商品
-	 *	 @param productIds 需要删除的商品ID列表
+	 *	 @method 删除设备
+	 *	 @param equipmentIds 需要删除的设备ID列表
 	*/
-	function deleteProduct(productIds) {
-		$.messager.confirm('删除', '确认要删除商品吗?', function(r){
+	function deleteEquipment(equipmentIds) {
+		$.messager.confirm('删除', '确认要删除设备吗?', function(r){
 			if (r) {
 				$.ajax({
 					url:'${path}/basic/equipment/delete',
 					type:'get',
 					data:{
-						productIds:productIds.join()
+						equipmentIds:equipmentIds.join()
 					},
 					success:function(data){
 						if (data.success == true) {
-							$.messager.alert('成功','删除' + data.count + '件商品成功!','info');
-							$('#product_list').datagrid('reload');
+							$.messager.alert('成功','删除' + data.count + '件设备成功!','info');
+							$('#equipment_list').datagrid('reload');
 						} else {
 							$.messager.alert('错误',data.message,'error');
 						}
@@ -208,19 +208,19 @@
 	}
 	
 	/**
-	 *	 @method 格式化商品一览的操作列(编辑和删除按钮)
+	 *	 @method 格式化设备一览的操作列(编辑和删除按钮)
 	 *	 @param value 数值
 	 *	 @param value 行
 	 *	 @return 格式化后的内容
 	*/
 	function formatOperator(value, row) {
-		var content = '<a href="#" class="operator-edit" onclick="editProduct(' + row.id + ');"></a>';
-		content += '<a href="#" class="operator-delete" onclick="deleteProductSingle(' + row.id + ');"></a>';
+		var content = '<a href="#" class="operator-edit" onclick="editEquipment(' + row.id + ');"></a>';
+		content += '<a href="#" class="operator-delete" onclick="deleteEquipmentSingle(' + row.id + ');"></a>';
 		return content;
 	}
 	
 	/**
-	 *	 @method 格式化商品一览的状态列
+	 *	 @method 格式化设备一览的状态列
 	 *	 @param value 数值
 	 *	 @param value 行
 	 *	 @return 格式化后的内容
@@ -234,44 +234,44 @@
 	}
 	
 	/**
-	 *	 @method 查询条件部search按钮点击后重新查询商品信息
+	 *	 @method 查询条件部search按钮点击后重新查询设备信息
 	*/
-	function searchProduct()
+	function searchEquipment()
 	{
-		//取得左边商品类目当前选中的类目
+		//取得左边设备类目当前选中的类目
 		var categoryId = null;
 		var panel = $('#category-accordion').accordion('getSelected');
 		if (panel != null) {
-			var productCategoryId = panel.panel('options').id
-			var selected = $('#tree' + productCategoryId).tree('getSelected');
+			var equipmentCategoryId = panel.panel('options').id
+			var selected = $('#tree' + equipmentCategoryId).tree('getSelected');
 			if (selected != null) {
 				categoryId = selected.id;
 			}
 		}
 		//类目没有选择的情况，报错
 		if (categoryId == null) {
-			$.messager.alert('错误', '请选择商品类目!', 'error');
+			$.messager.alert('错误', '请选择设备类目!', 'error');
 			return;
 		}
 		//取得查询条件
-		var productName = $('#productname-textbox').val();
-		var productStatus = $('#productstatus-combobox').val();
-		if (productStatus != 1 && productStatus != 0){
-			productStatus = null;
+		var equipmentName = $('#equipmentname-textbox').val();
+		var equipmentStatus = $('#equipmentstatus-combobox').val();
+		if (equipmentStatus != 1 && equipmentStatus != 0){
+			equipmentStatus = null;
 		}
-		//重新取得商品信息一览
-		$('#product_list').datagrid('load',{
-			name:productName,
+		//重新取得设备信息一览
+		$('#equipment_list').datagrid('load',{
+			name:equipmentName,
 			category:categoryId,
-			status:productStatus
+			status:equipmentStatus
 		});
 	}
 	
 	/**
-	 *	 @method 刷新本页的商品一览Grid(mainFrame在需要时会调用这个函数刷新本页面的数据)
+	 *	 @method 刷新本页的设备一览Grid(mainFrame在需要时会调用这个函数刷新本页面的数据)
 	*/
 	function reflushMe(){
-		$('#product_list').datagrid('reload');
+		$('#equipment_list').datagrid('reload');
 	}
 </script>
 </html>

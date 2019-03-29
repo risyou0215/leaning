@@ -19,8 +19,8 @@
 <script type="text/javascript" src="${path}/static/js/common.js"></script>
 </head>
 <body>
-    <div class="easyui-panel" title="商品信息" data-options="fit:true,border:false">
-    	<form id="product_form" class="easyui-form" method="post" data-options="iframe:false">
+    <div class="easyui-panel" title="设备信息" data-options="fit:true,border:false">
+    	<form id="equipment_form" class="easyui-form" method="post" data-options="iframe:false">
     			<div id="pic-tool">
 					<a href="#" class="icon-add easyui-tooltip" title="添加图片" onclick="addPicture()"></a>
 					<a href="#" class="icon-remove easyui-tooltip" title="移除图片" onclick="deletePicture()"></a>
@@ -43,18 +43,18 @@
 				</div>
 				<div style="margin-right: 400px">
 					<div style="width: 100%">
-						<input type="hidden" name="id" value="${product.id}" />
+						<input type="hidden" name="id" value="${equipment.id}" />
 						<div style="padding:10px">
-							<input id="product-no-textbox" name="no" labelPosition="left" class="easyui-textbox" style="width:95%" data-options="required:true,label:'设备编号:',icons:[{iconCls:'icon-barcode',handler:openBarcodeDlg}]" value="${product.no}" />
+							<input id="equipment-no-textbox" name="no" labelPosition="left" class="easyui-textbox" style="width:95%" data-options="required:true,label:'设备编号:',icons:[{iconCls:'icon-barcode',handler:openBarcodeDlg}]" value="${equipment.no}" />
 						</div>    
 						<div style="padding: 10px">
-							<input name="name" class="easyui-textbox" labelPosition="left" style="width: 95%"  data-options="required:true,label:'设备名称:'"  value="${product.name}"/>
+							<input name="name" class="easyui-textbox" labelPosition="left" style="width: 95%"  data-options="required:true,label:'设备名称:'"  value="${equipment.name}"/>
 						</div>
 						<div div style="padding: 10px">
-							<input class="easyui-combotree" id="category_combotree" name="category" labelPosition="left" style="width: 95%" data-options="required:true,label:'设备类型:'"  value="${product.category}"/>
+							<input class="easyui-combotree" id="category_combotree" name="category" labelPosition="left" style="width: 95%" data-options="required:true,label:'设备类型:'"  value="${equipment.category}"/>
 						</div>
 						<div div style="padding: 10px">
-							<input name="address" class="easyui-textbox" labelPosition="left" style="width: 95%" data-options="label:'设备地址:'" value="${product.address}"/>
+							<input name="address" class="easyui-textbox" labelPosition="left" style="width: 95%" data-options="label:'设备地址:'" value="${equipment.address}"/>
 						</div>
 						<div div style="padding: 10px">
 							<label for="status">是否在用:</label>
@@ -70,7 +70,7 @@
 				</div>
 			</form>   
     </div>
-    <div id="barcode-dialog" class="easyui-dialog" title="商品二维码" style="width:500px;height:362px" 
+    <div id="barcode-dialog" class="easyui-dialog" title="设备二维码" style="width:500px;height:362px" 
     	data-options="closed:true,modal:true,toolbar: [{
 					text:'打印标签',
 					iconCls:'icon-print',
@@ -85,7 +85,7 @@
  	 *	 @method 页面载入
 	*/
 	$(function() {
-		//获取商品类目树
+		//获取设备类目树
 		$.ajax({
 			url : '${path}/basic/category/0',
 			type : 'get',
@@ -111,22 +111,22 @@
 		
 		
 		
-		//设置商品的状态(在售/停售)
-		if ('${product.id}' == null || '${product.id}' == '') { //新建的情况，初始化始终为在售
+		//设置设备的状态(在售/停售)
+		if ('${equipment.id}' == null || '${equipment.id}' == '') { //新建的情况，初始化始终为在售
 			$('#status-switch').switchbutton({checked:true});
 			$.ajax({
 	            url:'${path}/common/generateCode',
 	            type:'GET',
 	            data:{
-	            	tablename:'basic_product',
+	            	tablename:'basic_equipment',
 	            	codeColumn:'no',
 	            },
 	            success:function(data){
-	            	$('#product-no-textbox').textbox('setValue', data);
+	            	$('#equipment-no-textbox').textbox('setValue', data);
 	            }
 	        });
 		} else {  //编辑的情况
-			if ('${product.status}' == 'true'){
+			if ('${equipment.status}' == 'true'){
 				$('#status-switch').switchbutton({checked:true});
 			} else {
 				$('#status-switch').switchbutton({checked:false});
@@ -139,17 +139,17 @@
 			pageNumber:1,
 			onSelectPage:onSelectPicturePage
 		});
-		selectPicture('${product.id}', 1);
+		selectPicture('${equipment.id}', 1);
 
 		//form提交函数设置,替换默认的操作
-		$('#product_form').submit(productFormSubmit);
+		$('#equipment_form').submit(equipmentFormSubmit);
 	});
 	
 	/**
-	 *	 @method 商品信息form提交
+	 *	 @method 设备信息form提交
 	 *   @param e 事件对象
 	*/
-	function productFormSubmit(e) {
+	function equipmentFormSubmit(e) {
 		var form = e.currentTarget;
 		$(form).ajaxSubmit({        
 			url:'${path}/basic/equipment/save',
@@ -162,10 +162,10 @@
 				if (data.success == true) {
 					$.messager.alert({
 						title:'成功',
-						msg:'保存商品成功!',
+						msg:'保存设备成功!',
 						icon:'info',
 						fn:function(){
-							parent.reflushSubFrame('商品管理');
+							parent.reflushSubFrame('设备管理');
 							cancelEdit();
 						}
 					});
@@ -179,10 +179,10 @@
 	}
 	
 	/**
-	 *	 @method 保存商品按钮事件(提交)
+	 *	 @method 保存设备按钮事件(提交)
 	*/
 	function saveEquipment() {
-		$('#product_form').submit();
+		$('#equipment_form').submit();
 	}
 
 	/**
@@ -209,7 +209,7 @@
 	 *	 @method 添加图片
 	*/
 	function addPicture() {
-		selectFiles('${product.id}', '${path}/basic/equipment/uploadPicture', refreshPicture);
+		selectFiles('${equipment.id}', '${path}/basic/equipment/uploadPicture', refreshPicture);
 	}
 	
 	/**
@@ -248,15 +248,15 @@
 	
 	/**
 	 *	 @method 选择图片
-	 *	 @param productId 商品ID
+	 *	 @param equipmentId 设备ID
 	 *	 @param index 图片index
 	*/
-	function selectPicture(productId, index) {
+	function selectPicture(equipmentId, index) {
 		$.ajax({
 			url:'${path}/basic/equipment/selectPicture',
 			type:'post',
 			data:{
-				productId:productId,
+				equipmentId:equipmentId,
 				index:index
 			},
 			success:function(data) {
@@ -291,11 +291,11 @@
 	 *	 @method 图片选择按钮点击时触发
 	*/
 	function onSelectPicturePage(pageNumber, pageSize) {
-		selectPicture('${product.id}', pageNumber);
+		selectPicture('${equipment.id}', pageNumber);
 	}
 	
 	function openBarcodeDlg() {
-		var no = $('#product-no-textbox').textbox('getValue');
+		var no = $('#equipment-no-textbox').textbox('getValue');
 		$('#barcode-dialog').dialog('open');
 		$('#picture-barcode').attr('src', '${path}/common/generateBarcode/' + no);
 	}

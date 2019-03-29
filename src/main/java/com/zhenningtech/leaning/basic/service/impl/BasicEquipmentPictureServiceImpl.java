@@ -22,17 +22,17 @@ public class BasicEquipmentPictureServiceImpl implements BasicEquipmentPictureSe
 	private SystemAttachmentService systemAttachmentService;
 
 	@Override
-	public int insert(Integer productId, Integer attachmentId) {
-		return basicEquipmentPictureMapper.insertGeneratorKey(productId, attachmentId);
+	public int insert(Integer equipmentId, Integer attachmentId) {
+		return basicEquipmentPictureMapper.insertGeneratorKey(equipmentId, attachmentId);
 	}
 
 	@Override
-	public int insertFromAttachment(Integer productId) {
+	public int insertFromAttachment(Integer equipmentId) {
 		int result = 0;
-		List<SystemAttachment> systemAttachments = systemAttachmentService.selectByIdsOrAttachmentType("PRODUCT", null);
-		result += systemAttachmentService.updateAttachmentType("PRODUCT");
+		List<SystemAttachment> systemAttachments = systemAttachmentService.selectByIdsOrAttachmentType("EQUIPMENT", null);
+		result += systemAttachmentService.updateAttachmentType("EQUIPMENT");
 		for (SystemAttachment systemAttachment : systemAttachments) {
-			result += basicEquipmentPictureMapper.insertGeneratorKey(productId, systemAttachment.getId());
+			result += basicEquipmentPictureMapper.insertGeneratorKey(equipmentId, systemAttachment.getId());
 		}
 		return result;
 	}

@@ -60,10 +60,10 @@ public class BasicCategoryServiceImpl implements BasicCategoryService {
 	}
 
 	/**
-	 * 创建指定父商品类目下的子商品类目树
-	 * @param categoryList 所有的商品类目信息列表
-	 * @param pId 指定父商品类目ID
-	 * @return 子商品类目树
+	 * 创建指定父设备类目下的子设备类目树
+	 * @param categoryList 所有的设备类目信息列表
+	 * @param pId 指定父设备类目ID
+	 * @return 子设备类目树
 	 */
 	private List<TreeNode> selectCategoryTree(List<BasicCategory> categoryList, Integer pId)
 	{
@@ -77,7 +77,7 @@ public class BasicCategoryServiceImpl implements BasicCategoryService {
 				Map<String, Object> attributes = new HashMap<String, Object>();
 				attributes.put("code", category.getCode());
 				node.setAttributes(attributes);
-				node.setChildren(selectCategoryTree(categoryList, category.getId())); 	//递归添加子商品类目
+				node.setChildren(selectCategoryTree(categoryList, category.getId())); 	//递归添加子设备类目
 				treeCategory.add(node);
 			}
 		}
@@ -85,27 +85,27 @@ public class BasicCategoryServiceImpl implements BasicCategoryService {
 	}
 	
 	/**
-	 * 删除指定父商品类目的子类目(逻辑删除)
-	 * @param categoryList 所有的商品类目信息列表
-	 * @param pId 指定父商品类目ID
-	 * @return 成功删除商品类目数量
+	 * 删除指定父设备类目的子类目(逻辑删除)
+	 * @param categoryList 所有的设备类目信息列表
+	 * @param pId 指定父设备类目ID
+	 * @return 成功删除设备类目数量
 	 */
 	private int deleteTree(List<BasicCategory> categorys, Integer pId) {
 		int result = 0;
 		for (BasicCategory category : categorys) {
 			if (category.getParentId() == pId) {
 				result += basicCategoryMapper.deleteByPrimaryKeyLogic(category.getId()); 
-				result += deleteTree(categorys, category.getId());  //递归删除子商品类目
+				result += deleteTree(categorys, category.getId());  //递归删除子设备类目
 			}
 		}
 		return result;
 	}
 	
 	/**
-	 * 获取指定父商品类目下所有的子商品类目的ID
-	 * @param categorys 所有商品类目信息列表
-	 * @param pId 父商品类目ID
-	 * @return 子商品类目ID列表
+	 * 获取指定父设备类目下所有的子设备类目的ID
+	 * @param categorys 所有设备类目信息列表
+	 * @param pId 父设备类目ID
+	 * @return 子设备类目ID列表
 	 */
 	private List<Integer> selectCategoryIds(List<BasicCategory> categorys, Integer pId) {
 		List<Integer> ids = new ArrayList<Integer>();
