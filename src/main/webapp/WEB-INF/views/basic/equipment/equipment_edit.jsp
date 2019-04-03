@@ -57,6 +57,12 @@
 							<input name="address" class="easyui-textbox" labelPosition="left" style="width: 95%" data-options="label:'设备地址:'" value="${equipment.address}"/>
 						</div>
 						<div div style="padding: 10px">
+							<input name="username" class="easyui-textbox" labelPosition="left" style="width: 95%" data-options="label:'用户名:'" value="${equipment.username}"/>
+						</div>
+						<div div style="padding: 10px">
+							<input name="password" class="easyui-passwordbox" labelPosition="left" style="width: 95%" data-options="label:'密码:'" value="${equipment.password}"/>
+						</div>
+						<div div style="padding: 10px">
 							<label for="status">是否在用:</label>
 							<td>
 								<input id="status-switch" name="status" class="easyui-switchbutton" checked data-options="onText:'使用',offText:'停用'">

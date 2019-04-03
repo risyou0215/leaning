@@ -13,6 +13,8 @@ public interface BasicEquipmentService {
 	
 	List<BasicEquipment> selectEquipmentInPaging(Integer page, Integer rows, BasicEquipment basicEquipment);
 	
+	List<BasicEquipment> selectEquipmentByCategory(Integer categoryId);
+	
 	int deleteEquipment(List<Integer> equipmentIds);
 	
 	BasicEquipment selectEquipment(Integer equipmentId);

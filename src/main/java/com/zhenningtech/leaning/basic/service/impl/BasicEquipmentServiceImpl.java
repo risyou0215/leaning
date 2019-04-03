@@ -46,6 +46,12 @@ public class BasicEquipmentServiceImpl implements BasicEquipmentService {
 		PageHelper.startPage(page, rows);
 		return basicEquipmentMapper.selectEquipment(ids, basicEquipment);
 	}
+	
+	@Override
+	public List<BasicEquipment> selectEquipmentByCategory(Integer categoryId) {
+		List<Integer> ids = basicCategoryService.selectCategoryIds(categoryId);
+		return basicEquipmentMapper.selectEquipment(ids, null);
+	}
 
 	@Override
 	public int deleteEquipment(List<Integer> equipmentId) {
