@@ -1,3 +1,9 @@
+.icon-play{
+	background:url('icons/play.png') no-repeat center center;
+}
+.icon-stop{
+	background:url('icons/stop.png') no-repeat center center;
+}
 .icon-blank{
 	background:url('icons/blank.gif') no-repeat center center;
 }

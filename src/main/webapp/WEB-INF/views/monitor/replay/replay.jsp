@@ -17,25 +17,17 @@
 </head>
 <body class="easyui-layout">
 	<div id="p" data-options="region:'west',split:true" title="监控设备" style="width: 300px;">
-		<div id="monitor-equipments" class="easyui-tree" data-options="fit:true, border:false,formatter:equipmentTreeFormatter,onSelect:onCategorySelect">
+		<div id="monitor-equipments" class="easyui-tree" data-options="fit:true, border:false,formatter:equipmentTreeFormatter">
 		</div>
 	</div>
 	<div data-options="region:'center'" title="设备一览">
 		<div id="toolbar" style="padding: 2px 5px">
-			设备名称: 
-			<input id="equipmentname-textbox" class="easyui-textbox" style="width: 200px" /> 
-			设备状态: 
-			<select id="equipmentstatus-combobox" class="easyui-combobox" panelHeight="auto" style="width: 100px">
-				<option value="1">使用</option>
-				<option value="0">停用</option>
-			</select> 
-			<a href="#" class="easyui-linkbutton easyui-tooltip" title="查询" data-options="plain:true,iconCls:'icon-search'"></a>
+			<input id="datetimeFrom" class="easyui-datetimespinner" label="开始时间:" labelPosition="left" value="" style="width:250px;" />
+			<input id="datetimeTo" class="easyui-datetimespinner" label="结束时间:" labelPosition="left" value="" style="width:250px;"> 
+			<a href="#" class="easyui-linkbutton easyui-tooltip" title="播放" data-options="plain:true,iconCls:'icon-play',onClick:replay"></a>
+			<a href="#" class="easyui-linkbutton easyui-tooltip" title="停止" data-options="plain:true,iconCls:'icon-stop',onClick:stop"></a>
 		</div>
 		<div id="divPlugin" class="plugin" style="width:1000px; height:600px;"></div>
-	</div>
-	<div id="pager_buttons" style="padding: 2px 5px">
-		<a href="#" class="easyui-linkbutton easyui-tooltip" title="新增" data-options="plain:true,iconCls:'icon-add'"></a> 
-		<a href="#" class="easyui-linkbutton easyui-tooltip" title="删除" data-options="plain:true,iconCls:'icon-remove'"></a>
 	</div>
 </body>
 <script type="text/javascript" id="videonode" src="${path}/static/video/webVideoCtrl.js"></script>
@@ -55,6 +47,11 @@
 				$('#monitor-equipments').tree('loadData', data);
 			}
 		});
+		
+		var date = new Date();
+	    var strDate = date.Format("yyyy-MM-dd");
+	    $('#datetimeFrom').datetimespinner('setValue', strDate + ' 00:00:00');
+	    $('#datetimeTo').datetimespinner('setValue', strDate + ' 23:59:59');
 		
 		var iRet = WebVideoCtrl.I_CheckPluginInstall();
 	    if (-1 == iRet) {
@@ -103,16 +100,12 @@
 	    });
 	});
 	
-	
-	/**
-	 *	 @method 设备类目选中时，取得该类目下的设备一览
-	 *  @param node 选中节点的内容
-	*/
-	function onCategorySelect(node) {
-		preview(node);
+	function equipmentTreeFormatter(node) {
+		return node.name;
 	}
 	
-	function preview(cfg) {
+	function replay(){
+		var cfg = $('#monitor-equipments').tree('getSelected');
 		if (cfg.id != null) return;
 	    var szIP = cfg.address,
 	        szPort = '80',
@@ -128,7 +121,7 @@
 
 	    var iRet = WebVideoCtrl.I_Login(szIP, 1, szPort, szUsername, szPassword, {
 	        success: function (xmlDoc) {            
-	        	startRealPlay(parseInt(cfg.no) + 1);
+	        	startPlayback(parseInt(cfg.no) + 1);
 	        },
 	        error: function (status, xmlDoc) {
 	        	alert('登录失败');
@@ -136,50 +129,87 @@
 	    });
 	    
 	    if (-1 == iRet) {
-	    	startRealPlay(parseInt(cfg.no) + 1);
+	    	startPlayback(parseInt(cfg.no) + 1);
 	    }
 	}
 	
-	function startRealPlay(channel) {
+	function startPlayback(channel) {
+		var szStartTime = $('#datetimeFrom').datetimespinner('getValue');
+		var szEndTime = $('#datetimeTo').datetimespinner('getValue');
+		
 		var oWndInfo = WebVideoCtrl.I_GetWindowStatus(g_iWndIndex);
 		if (oWndInfo != null) {// 已经在播放了，先停止
 	        WebVideoCtrl.I_Stop({
 	            success: function () {
-	            	WebVideoCtrl.I_StartRealPlay(g_szDeviceIdentify, {
+	            	WebVideoCtrl.I_StartPlayback(g_szDeviceIdentify, {
 	                    iChannelID: channel,
-	                    success: function () {   
+	                    szStartTime: szStartTime,
+	                    szEndTime: szEndTime,
+	                    success: function () {
+	                        
 	                    },
 	                    error: function (status, xmlDoc) {
 	                        if (403 === status) {
-	                        	 alert('设备不支持Websocket取流！');
+	                             alert("设备不支持Websocket取流！");
 	                        } else {
-	                        	alert('开始预览失败！');
+	                        	alert("开始回放失败！");
 	                        }
 	                    }
 	                });
 	            }
 	        });
 	    }  else {
-	    	WebVideoCtrl.I_StartRealPlay(g_szDeviceIdentify, {
-	            iChannelID: channel,
-	            success: function () {   
+	    	WebVideoCtrl.I_StartPlayback(g_szDeviceIdentify, {
+                iChannelID: channel,
+                szStartTime: szStartTime,
+                szEndTime: szEndTime,
+                success: function () {
+                    
+                },
+                error: function (status, xmlDoc) {
+                    if (403 === status) {
+                    	alert("设备不支持Websocket取流！");
+                    } else {
+                    	alert("开始回放失败！");
+                    }
+                }
+            });
+	    }
+	}
+	
+	function stop() {
+		var oWndInfo = WebVideoCtrl.I_GetWindowStatus(g_iWndIndex);
+
+	    if (oWndInfo != null) {
+	        WebVideoCtrl.I_Stop({
+	            success: function () {
+	            	
 	            },
-	            error: function (status, xmlDoc) {
-	                if (403 === status) {
-	                	 alert('设备不支持Websocket取流！');
-	                } else {
-	                	alert('开始预览失败！');
-	                }
+	            error: function () {
+	            	alert("停止回放失败！");
 	            }
 	        });
 	    }
-		
 	}
 	
-	function equipmentTreeFormatter(node) {
-		return node.name;
+	Date.prototype.Format = function(fmt) {
+	    var o = {
+	        "M+": this.getMonth() + 1,
+	        "d+": this.getDate(),
+	        "h+": this.getHours(),
+	        "m+": this.getMinutes(),
+	        "s+": this.getSeconds(),
+	        "q+": Math.floor((this.getMonth() + 3) / 3),
+	        "S": this.getMilliseconds()
+	    };
+	    if (/(y+)/.test(fmt))
+	        fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+	    for (var k in o){
+	        if (new RegExp("(" + k + ")").test(fmt)) {
+	            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+	        }
+	    }
+	    return fmt;
 	}
-	
-	
 </script>
 </html>
