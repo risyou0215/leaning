@@ -29,13 +29,13 @@
 				<option value="1">使用</option>
 				<option value="0">停用</option>
 			</select> 
-			<a href="#" class="easyui-linkbutton easyui-tooltip" title="查询" data-options="plain:true,iconCls:'icon-search',onClick:searchEquipment"></a>
+			<a href="#" class="easyui-linkbutton easyui-tooltip" title="查询" data-options="plain:true,iconCls:'icon-search'"></a>
 		</div>
 		<div id="divPlugin" class="plugin" style="width:1000px; height:600px;"></div>
 	</div>
 	<div id="pager_buttons" style="padding: 2px 5px">
-		<a href="#" class="easyui-linkbutton easyui-tooltip" title="新增" data-options="plain:true,iconCls:'icon-add',onClick:addEquipment"></a> 
-		<a href="#" class="easyui-linkbutton easyui-tooltip" title="删除" data-options="plain:true,iconCls:'icon-remove',onClick:deleteEquipmentMulti"></a>
+		<a href="#" class="easyui-linkbutton easyui-tooltip" title="新增" data-options="plain:true,iconCls:'icon-add'"></a> 
+		<a href="#" class="easyui-linkbutton easyui-tooltip" title="删除" data-options="plain:true,iconCls:'icon-remove'"></a>
 	</div>
 </body>
 <script type="text/javascript" id="videonode" src="${path}/static/video/webVideoCtrl.js"></script>
@@ -109,13 +109,10 @@
 	 *  @param node 选中节点的内容
 	*/
 	function onCategorySelect(node) {
-		Login(node);
-		
-		
-		//alert(JSON.stringify(node));
+		preview(node);
 	}
 	
-	function Login(cfg) {
+	function preview(cfg) {
 	    var szIP = cfg.address,
 	        szPort = '80',
 	        szUsername = cfg.username,
@@ -130,164 +127,52 @@
 
 	    var iRet = WebVideoCtrl.I_Login(szIP, 1, szPort, szUsername, szPassword, {
 	        success: function (xmlDoc) {            
-	        	startRealPlay(1);
+	        	startRealPlay(parseInt(cfg.no) + 1);
 	        },
 	        error: function (status, xmlDoc) {
 	        	alert('登录失败');
 	        }
 	    });
-
+	    
 	    if (-1 == iRet) {
-	        showOPInfo(szDeviceIdentify + " 已登录过！");
+	    	startRealPlay(parseInt(cfg.no) + 1);
 	    }
 	}
 	
-	function startRealPlay(iStreamType) {
-		WebVideoCtrl.I_StartRealPlay(g_szDeviceIdentify, {
-            iChannelID: 1,
-            success: function () {   
-            },
-            error: function (status, xmlDoc) {
-                if (403 === status) {
-                	 alert('设备不支持Websocket取流！');
-                } else {
-                	alert('开始预览失败！');
-                }
-            }
-        });
-	}
-	
-	/**
-	 *	 @method 新建设备，打开一个新建设备的Tab
-	*/
-	function addEquipment() {
-		var tabs = parent.$('#mainframe');
-		addTab(tabs, 1, '新建设备', '${path}/basic/equipment/add');
-	}
-	
-	/**
-	 *	 @method 编辑设备，打开一个编辑设备的Tab
-	*/
-	function editEquipment(equipmentId) {
-		//编辑按钮的tooltip会在打开新的Tab后，一直保持在显示状态，所以要人为关闭一下
-		var btns = $('.operator-edit');
-		for (var i = 0; i < btns.length; i ++) {
-			$(btns[i]).tooltip('hide');
-		}
-		var tabs = parent.$('#mainframe');
-		addTab(tabs, equipmentId, '编辑设备', '${path}/basic/equipment/edit/' + equipmentId);
-	}
-	
-	/**
-	 *	 @method 删除单个设备(在点击每行操作列的删除按钮时触发)
-	 *	 @param equipmentId 设备ID  
-	*/
-	function deleteEquipmentSingle(equipmentId) {
-		var ids = [];
-		ids.push(equipmentId);
-		deleteEquipment(ids);
-	}
-	
-	/**
-	 *	 @method 删除设备一览Grid里选中的设备(在点击Footer部的删除按钮时触发)
-	*/
-	function deleteEquipmentMulti() {
-		var ids = [];
-		var rows = $('#equipment_list').datagrid('getChecked');
-		if (rows.length < 1) {
-			$.messager.alert('错误','请选择想要删除的设备!','error');
-			return;
-		}
-		for (var i =0; i < rows.length; i++){
-			ids.push(rows[i].id);
-		}
-		deleteEquipment(ids)	;
-	}
-	
-	/**
-	 *	 @method 删除设备
-	 *	 @param equipmentIds 需要删除的设备ID列表
-	*/
-	function deleteEquipment(equipmentIds) {
-		$.messager.confirm('删除', '确认要删除设备吗?', function(r){
-			if (r) {
-				$.ajax({
-					url:'${path}/basic/equipment/delete',
-					type:'get',
-					data:{
-						equipmentIds:equipmentIds.join()
-					},
-					success:function(data){
-						if (data.success == true) {
-							$.messager.alert('成功','删除' + data.count + '件设备成功!','info');
-							$('#equipment_list').datagrid('reload');
-						} else {
-							$.messager.alert('错误',data.message,'error');
-						}
-					}
-				});
-			}
-		});
-	}
-	
-	/**
-	 *	 @method 格式化设备一览的操作列(编辑和删除按钮)
-	 *	 @param value 数值
-	 *	 @param value 行
-	 *	 @return 格式化后的内容
-	*/
-	function formatOperator(value, row) {
-		var content = '<a href="#" class="operator-edit" onclick="editEquipment(' + row.id + ');"></a>';
-		content += '<a href="#" class="operator-delete" onclick="deleteEquipmentSingle(' + row.id + ');"></a>';
-		return content;
-	}
-	
-	/**
-	 *	 @method 格式化设备一览的状态列
-	 *	 @param value 数值
-	 *	 @param value 行
-	 *	 @return 格式化后的内容
-	*/
-	function formatStatus(value, row) {
-		if (value == true) {
-			return '使用';
-		} else {
-			return '停用';
-		}
-	}
-	
-	/**
-	 *	 @method 查询条件部search按钮点击后重新查询设备信息
-	*/
-	function searchEquipment()
-	{
-		//取得左边设备类目当前选中的类目
-		var categoryId = null;
-		var panel = $('#category-accordion').accordion('getSelected');
-		if (panel != null) {
-			var equipmentCategoryId = panel.panel('options').id
-			var selected = $('#tree' + equipmentCategoryId).tree('getSelected');
-			if (selected != null) {
-				categoryId = selected.id;
-			}
-		}
-		//类目没有选择的情况，报错
-		if (categoryId == null) {
-			$.messager.alert('错误', '请选择设备类目!', 'error');
-			return;
-		}
-		//取得查询条件
-		var equipmentName = $('#equipmentname-textbox').val();
-		var equipmentStatus = $('#equipmentstatus-combobox').val();
-		if (equipmentStatus != 1 && equipmentStatus != 0){
-			equipmentStatus = null;
-		}
-		//重新取得设备信息一览
-		$('#equipment_list').datagrid('load',{
-			name:equipmentName,
-			category:categoryId,
-			status:equipmentStatus
-		});
+	function startRealPlay(channel) {
+		var oWndInfo = WebVideoCtrl.I_GetWindowStatus(g_iWndIndex);
+		if (oWndInfo != null) {// 已经在播放了，先停止
+	        WebVideoCtrl.I_Stop({
+	            success: function () {
+	            	WebVideoCtrl.I_StartRealPlay(g_szDeviceIdentify, {
+	                    iChannelID: channel,
+	                    success: function () {   
+	                    },
+	                    error: function (status, xmlDoc) {
+	                        if (403 === status) {
+	                        	 alert('设备不支持Websocket取流！');
+	                        } else {
+	                        	alert('开始预览失败！');
+	                        }
+	                    }
+	                });
+	            }
+	        });
+	    }  else {
+	    	WebVideoCtrl.I_StartRealPlay(g_szDeviceIdentify, {
+	            iChannelID: channel,
+	            success: function () {   
+	            },
+	            error: function (status, xmlDoc) {
+	                if (403 === status) {
+	                	 alert('设备不支持Websocket取流！');
+	                } else {
+	                	alert('开始预览失败！');
+	                }
+	            }
+	        });
+	    }
+		
 	}
 	
 	function equipmentTreeFormatter(node) {

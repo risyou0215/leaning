@@ -31,7 +31,7 @@
 			<a href="#" class="easyui-linkbutton easyui-tooltip" title="查询" data-options="plain:true,iconCls:'icon-search',onClick:searchEquipment"></a>
 		</div>
 		<table id="equipment_list" class="easyui-datagrid"
-			data-options="border:false, fit:true, pagination:true, toolbar:'#toolbar',onClickRow:onClickDataGridRow">
+			data-options="border:false,fit:true, pagination:true, toolbar:'#toolbar',onClickRow:onClickDataGridRow">
 			<thead>
 				<tr>
 					<th data-options="field:'check',checkbox:true"></th>
@@ -72,8 +72,8 @@
 		//设置设备一览Grid的url，并在并设置操作列里按钮的样式
 		$('#equipment_list').datagrid({
 			url:'${path}/basic/equipment/page',
-			method:'get',
-			cache:false,
+			method:'post',
+			//cache:false,
 			onLoadSuccess:function(data) {
 				$('.operator-edit').linkbutton({
 					plain:true,

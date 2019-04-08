@@ -46,6 +46,7 @@ public class MonitorServiceImpl implements MonitorService {
 		    			monitor.setUsername(equipment.getUsername());
 		    			monitor.setPassword(equipment.getPassword());
 		    			monitor.setName(String.format("摄像头%d", i));
+		    			monitor.setNo(String.valueOf(i));
 		    			children.add(i, monitor);
 		    		}
 		    	}

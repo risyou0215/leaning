@@ -51,7 +51,7 @@ public class BasicEquipmentController {
 		return mv;
 	}
 	
-	@RequestMapping(value="page", method=RequestMethod.GET)
+	@RequestMapping(value="page", method=RequestMethod.POST)
 	@ResponseBody
 	public ModelMap page(@RequestParam(value="page", defaultValue="1") Integer page, 
 			@RequestParam(value="rows", defaultValue="10") Integer rows, 
